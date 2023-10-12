@@ -90,7 +90,7 @@ alt="">
 <h2>Хотите научиться профессионально инвестировать и всегда оставаться в плюсе?</h2>
 <p>Грамотно разберем вашу финансовую ситуацию, разработаем стратегию и поможем эффективно инвестировать
 </p>
-<button>Записаться на курс</button>
+<button @onclick="ToCourse">Записаться на курс</button>
 </div>
 </div>
 
@@ -135,5 +135,10 @@ if (result is not null)
   course = await result;
 }
 }
+
+    void ToCourse()
+    {
+        NavigationManager.NavigateTo(NavigateUrl.ToCourse);
+    }
 }
 
