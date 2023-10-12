@@ -1,0 +1,88 @@
+﻿@page "/AllCourses"
+@using BlazorClient.Client.Servies
+@using BlazorClient.Shared
+@inject IJSRuntime JsRuntime
+@inject ApiServices ApiServies
+@inject NavigationManager NavigationManager
+
+<head>
+    <style>
+        .card {
+            border-radius: 0px;
+            box-shadow: 0 0 2px grey;
+            margin: 20px 20px;
+        }
+
+            .card img {
+                border-radius: 0px;
+            }
+    </style>
+</head>
+
+<Navbar/>
+<div style="width: 1000px; margin: 0 auto; ">
+    <div style="height: 500px;">
+        <div style="background-image: url(https://umanitoba.ca/extended-education/sites/extended-education/files/styles/21x9_1100w/public/2021-05/Courses-header_1.jpg?itok=DPBp7WmX); background-repeat: no-repeat; background-size:cover ; height: 600px; background-position: center; width: 100%; position: absolute; top: 0; left: 0; right: 0; overflow: hidden; filter: brightness(50%);">
+        </div>
+        <h1 style="position: relative; color: white; text-align: center; margin-top: 300px;">Все курсы</h1>
+    </div>
+
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+
+       @if (course.Count > 0)
+       {
+           @foreach (var item in course.Take(takeCount))
+           {
+               <div @onclick="() => AboutCourse(item)" class="card" style="width: 18rem;">
+                   <img src="@item.Url"
+                        class="card-img-top" alt="">
+                   <div class="card-body">
+                       <h5 class="card-title">@item.Name</h5>
+                       <p class="card-text">@item.Description</p>
+                       <h5 class="mt-4">Цена : @item.Price сум</h5>
+                   </div>
+               </div>
+           }
+        
+       }
+       else
+       {
+           <h1>Нет курсов</h1>
+       }
+        <div style="width: 100%">
+            <button @onclick="IncreaseTake" class=" AddCourseBtn" style=" margin: 50px 0; position: relative; left: 50%; transform:  translateX(-50%); width: 180px; height: 40px; background: #35A4D9; border: none; border-radius: 6px;">Посмотреть ещё</button>
+        </div>
+
+    </div>
+</div>
+
+<Footer/>
+
+@code {
+
+    public List<Course>? course = new List<Course>();
+
+    protected override async System.Threading.Tasks.Task OnInitializedAsync()
+    {
+        var result = ApiServies.GetCourseList();
+        if (result is not null)
+        {
+            course = await result;
+        }
+    }
+
+    private int takeCount = 12;
+    void IncreaseTake()
+    {
+        takeCount += 6;
+    }
+
+    async void AboutCourse(Course course)
+    {
+        await JsRuntime.InvokeVoidAsync("localStorage.setItem", "courseId", course.Id);
+        NavigationManager.NavigateTo(NavigateUrl.ToAboutCourse);
+    }
+
+
+
+}

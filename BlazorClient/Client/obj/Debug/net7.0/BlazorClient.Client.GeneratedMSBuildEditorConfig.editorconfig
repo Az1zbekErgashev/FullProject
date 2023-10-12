@@ -1,0 +1,93 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = BlazorClient.Client
+build_property.RootNamespace = BlazorClient.Client
+build_property.ProjectDir = C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Client\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Client
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/Pages/AboutPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWJvdXRQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/Pages/Contact.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29udGFjdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/Pages/Courses.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/Pages/Footer.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRm9vdGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/Pages/ForgotPassword.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRm9yZ290UGFzc3dvcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/Pages/HomeWork.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZVdvcmsucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/Pages/LessonPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVzc29uUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/Pages/LoginPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW5QYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/Pages/MyCours.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTXlDb3Vycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/Pages/Navbar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmF2YmFyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/Pages/PostHomeWork.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9zdEhvbWVXb3JrLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/Pages/Registeer.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZWVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/Pages/TeacherPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhY2hlclBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/Pages/Test.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVzdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ergas/source/repos/BlazorClient/BlazorClient/Client/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-kq9a7h2n0t

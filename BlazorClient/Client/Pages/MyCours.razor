@@ -1,0 +1,75 @@
+﻿@page "/mycours"
+@using BlazorClient.Client.Servies
+@using BlazorClient.Shared
+@using BlazorClient.Client.Dto
+@inject ApiServices ApiServices
+@inject LocalStoradge LocalStoradge
+
+@inject NavigationManager NavigationManager
+
+<head>
+    <style></style>
+</head>
+<Navbar/>
+<div style="margin: 70px 0 0 0;">
+    <div style="height: 500px;">
+        <div style="background-image: url(https://plus.unsplash.com/premium_photo-1683531060766-c460adea7010?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80); background-repeat: no-repeat; background-size:cover ; height: 600px; background-position: center; width: 100%; position: absolute; top: 0; left: 0; right: 0; overflow: hidden; filter: brightness(50%);">
+        </div>
+        <h1 style="position: relative; color: white; text-align: center; margin-bottom: 100px; margin-top: 300px;">Мои курсы</h1>
+    </div>
+    <div style="margin-top: -70px; " class="body_index_page">
+        <div style="margin: 0 auto; margin-bottom: 370px;  display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+            
+            @if (UserCourse.Count <= 0)
+            {
+                <h4>Нет курсов</h4>
+            }
+            else
+            {
+                @foreach (var iteam in UserCourse)
+                {
+                    <div @onclick="() =>ToCourse(iteam)"  class="card m-4" style="width: 18rem;">
+                        <img src="@iteam.Url"
+                             class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">@iteam.Name</h5>
+                            <p class="card-text">@iteam.Description</p>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+</div>
+<Footer/>
+
+
+
+@code {
+    List<Course> UserCourse = new List<Course>();
+
+    public string EmailUser = String.Empty;
+    protected override async System.Threading.Tasks.Task OnInitializedAsync()
+    {
+        var email = await LocalStoradge.GetEmail();
+        EmailUser = email;
+        var respons = await ApiServices.GetByUserCourse(EmailUser);
+        UserCourse = respons;
+    }
+
+    async void ToCourse(Course course)
+    {
+
+        var id = await LocalStoradge.GetEmail();
+        if (string.IsNullOrEmpty(id))
+        {
+            NavigationManager.NavigateTo(NavigateUrl.ToLogin);
+        }
+        else
+        {
+           NavigationManager.NavigateTo(NavigateUrl.ToLesson);
+        }
+    }
+
+}

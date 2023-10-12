@@ -1,0 +1,89 @@
+﻿            @page "/about"
+            @using BlazorClient.Client.Servies
+            @using BlazorClient.Shared
+            @inject IJSRuntime JsRuntime
+            @inject ApiServices ApiServies
+            @inject NavigationManager NavigationManager
+            @inject LocalStoradge LocalStoradge
+
+            <head>
+            <style>
+
+            </style>
+            </head>
+            <Navbar/>
+            <div>
+            <div style="height: 400px;">
+            <div style="background-image: url(https://thumbs.dreamstime.com/b/office-room-7881663.jpg); background-repeat: no-repeat; background-size:cover ; height: 600px; background-position: center; width: 100%; position: absolute; top: 0; left: 0; right: 0; overflow: hidden; filter: brightness(50%);">
+            </div>
+        <h1 style="position: relative; color: white; text-align: center; margin-top: 300px;">О нашей компании</h1>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <img src="https://www.highstreet.co.id/UserFiles/Image/kanmo/IKP_0061.jpg" style="object-fit: contain; width: 630px;" />
+                    </div>
+                    <div class="col-6">
+                        <p style="font-size: 20px;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Vestibulum tempor arcu libero. Nam aliquet et nisi id congue
+                            . Praesent accumsan scelerisque nulla.
+                            Mauris semper erat id lectus consequat elementum.
+                            Donec bibendum augue tincidunt nibh placerat, vel pellentesque dui fermentum.
+                        </p> <br/>
+                        <p style="font-size: 20px;">
+                            Maecenas nec nibh vitae ligula viverra maximus. Phasellus commodo convallis neque,
+                            eu aliquet ante cursus id. Praesent suscipit sodales aliquet. Vestibulum tristique
+                            nulla sed purus interdum, ut dapibus odio finibus. Suspendisse potenti. Sed semper 
+                            elit in arcu mollis euismod in eget magna. In libero diam, egestas rutrum odio quis
+                            , tempus faucibus sem. Aenean cursus luctus erat sit amet fermentum. Etiam eleifend 
+                            augue mi, ac suscipit est convallis eu. Vivamus et felis a tortor viverra vestibulum a id enim.
+                        </p>
+                    </div>
+                </div>
+                <div style="margin: 100px 0;">
+            <h1 class="text-start">Наши преподаватели</h1>
+                </div>
+            <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+
+            @foreach (var item in teachers.Take(takeCount))
+            {
+            <div  class="card" style="width: 18rem;">
+            <img src="@item.Url"
+            class="card-img-top" alt="">
+            <div class="card-body">
+            <h5 class="card-title">@item.Name</h5>
+            <p class="card-text">@item.Description</p>
+            </div>
+            </div>
+            }
+
+            <div style="width: 100%">
+            <button @onclick="IncreaseTake" class=" AddCourseBtn" style=" margin: 50px 0; position: relative; left: 50%; transform:  translateX(-50%); width: 180px; height: 40px; background: #35A4D9; border: none; border-radius: 6px;">Посмотреть ещё</button>
+            </div>
+
+            </div>
+            </div>
+            </div>
+            <Footer/>
+            @code {
+
+            List<BlazorClient.Shared.Teacher> teachers = new List<BlazorClient.Shared.Teacher>();
+
+            private int takeCount = 12;
+            void IncreaseTake()
+            {
+            takeCount += 6;
+            }
+
+            protected override async System.Threading.Tasks.Task OnInitializedAsync()
+            {
+            var teach = await ApiServies.GetTeachers();
+            if (teach is not null)
+            {
+            teachers = teach;
+            }
+            }
+
+            }

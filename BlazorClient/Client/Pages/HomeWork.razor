@@ -1,0 +1,194 @@
+﻿@page "/homework"
+
+@using BlazorClient.Shared
+@using BlazorClient.Client.Servies
+@using Task = BlazorClient.Shared.Task
+@inject ApiServices ApiServies
+@inject IJSRuntime JsRuntime
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+@inject LocalStoradge LocalStoradge
+
+<head>
+    <style>
+        .task-row {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .lesson-row {
+            position: relative;
+            left: 50%;
+            transform: translateX(-40%);
+            padding: 00px 0;
+        }
+
+        .card-task {
+            width: 600px;
+            height: 300px;
+            margin: 10px 0;
+            background: #35A4D9;
+        }
+
+        .lesson-card {
+            margin: 20px 0;
+            height: 50px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: whitesmoke;
+            padding: 0 10px;
+            border-left: 5px solid azure;
+            box-shadow: 0 0 2px grey;
+        }
+
+        .borderLeft {
+            border-left: 5px solid blue;
+        }
+    </style>
+</head>
+<Navbar/>
+<div style="height: 400px;">
+    <div style="background-image: url(https://onlinedegrees.sandiego.edu/wp-content/uploads/2022/01/education_inequity_and_homework.jpg); background-repeat: no-repeat; background-size:cover ; height: 600px; background-position: center; width: 100%; position: absolute; top: 0; left: 0; right: 0; overflow: hidden; filter: brightness(50%);">
+    </div>
+    <h1 style="position: relative; color: white; text-align: center; margin-top: 300px;">Home Work</h1>
+</div>
+<div>
+    <div class="task-row" style="margin: 80px 0 ;">
+        <div class="row lesson-row">
+            <div class="col-3 p-4" style="overflow-x: hidden; overflow-y: scroll;">
+                <h3 style="text-align: center; font-weight: 700;" class="mb-5">Содержание</h3>
+                <div>
+                    @if (lessons.Count > 0)
+                    {
+                        @foreach (var item in lessons)
+                        {
+                            <div @onclick="() => LessonsId(item.Id, item.Title)" class="lesson-card  @(item.Id == Convert.ToInt32(lessonId)? "borderLeft" : "")">@item.Id @item.Title</div>
+                        }
+                    }
+                    else
+                    {
+                        <h1>Нет Уроков</h1>
+                    }
+                </div>
+            </div>
+            <div class="col-9" style="overflow-x: hidden; overflow-y: scroll;">
+                <div>
+                   @if (task.Count > 0)
+                   {
+                       @foreach (var item in task)
+                       {
+                           if (Convert.ToInt32(lessonId) == item.Lessons.Id)
+                           {
+                               <div @onclick="() => SendHome(item.Id)" class="card-task">
+                                   <div class="row p-2">
+                                       <div class="col-12 mb-5 mt-2 text-white">
+                                           <h3>@item.Title</h3>
+                                       </div>
+                                       <div class="col-12 text-white">
+                                           <p>@item.Description</p>
+                                       </div>
+                                       <div style="display: flex; justify-content: space-between; margin: 100px  0 0 0;">
+                                           <div>
+                               
+                                               @if(item.complete == false)
+                                               {
+                                                   <h4>Срок выполнения: @item.Data)</h4>
+                                               }
+                                               else
+                                               {
+                                                   <a>Вы можете скачать</a>
+
+                                               }
+                                           </div>
+                                           <div>
+                                               @if (dateToCheck < item.Data)
+                                               {
+                                                   <h3> В процессе...</h3>
+
+                                               }
+                                               else
+                                               {
+                                                   @if (item.complete == false)
+                                                   {
+                                                       <button disabled="disabled" class="bg-white text-danger">Не выполнено</button>
+                                                   }
+                                                   else
+                                                   {
+                                                       <button disabled="disabled" class="bg-white text-success">Выполнено</button>
+
+                                                   }
+                                               }
+                                            
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           }
+                       
+                       }
+                   }
+                   else
+                   {
+                       <h1>Нет Тасков</h1>
+                   }
+                
+
+                </div>
+            
+            </div>
+        </div>
+    </div>
+
+</div>
+<Footer/>
+@code {
+    DateTime dateToCheck = new DateTime(2023, 10, 11);
+    List<Lessons>  lessons = new List<Lessons>();
+    List<Task>  task = new List<Task>();
+    private string courseId;
+    private string lessonId;
+    private string TaskId;
+    private int count = 1;
+    protected override async System.Threading.Tasks.Task OnInitializedAsync()
+    {
+        var id = await LocalStoradge.GetCourseId();
+        if (id is not null)
+        {
+            courseId = id;
+        }
+
+        var LessonID = await JsRuntime.InvokeAsync<string>("localStorage.getItem", "lessonId");
+        lessonId = LessonID;
+
+        var response = await ApiServies.GetLessons(courseId);
+        if (response is not null)
+        {
+            lessons = response;
+        }
+        var taskRes = await ApiServies.GetTask();
+        if (taskRes is not null)
+        {
+            task = taskRes;
+        }
+
+
+        
+    }
+    async System.Threading.Tasks.Task LessonsId(int selectedLessonId, string lessonTitle)
+    {
+        this.lessonId = selectedLessonId.ToString();
+        await JsRuntime.InvokeVoidAsync("localStorage.setItem", "lessonId", selectedLessonId);
+    }
+
+  async  void SendHome(int id)
+    {
+       await JsRuntime.InvokeAsync<string>("localStorage.setItem", "taskId", id);
+
+        NavigationManager.NavigateTo(NavigateUrl.ToHomeWorkSend);
+    }
+
+
+}

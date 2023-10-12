@@ -1,0 +1,224 @@
+﻿@using BlazorClient.Client.Servies
+@inject IJSRuntime JsRuntime
+@inject LocalStoradge LocalStoradge
+
+@inject NavigationManager NavigationManager
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        .Navbar {
+            width: 100%;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            transition: 0.3s;
+            z-index: 1;
+            box-shadow: 3px 0px 1px black;
+        }
+
+            .Navbar ul {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                list-style: none;
+            }
+
+                .Navbar ul li {
+                    margin: 0 20px;
+                    cursor: pointer;
+                    color: white;
+                }
+
+                    .Navbar ul li img {
+                        object-fit: contain;
+                        width: 250px;
+                    }
+
+                    .Navbar ul li button {
+                        border-radius: 6px;
+                        color: white;
+                        background: #35A4D9;
+                        width: 180px;
+                        height: 40px;
+                        font-weight: 600;
+                        outline: none;
+                        border: none;
+                    }
+
+        .scrolled {
+            background-color: white !important;
+        }
+
+            .scrolled ul li {
+                color: black !important;
+            }
+
+        .dispImage {
+            display: none;
+        }
+
+    </style>
+</head>
+
+<div>
+    <div class="Navbar">
+        <ul>
+            <li style="margin-right: 150px">
+                <img @onclick="ToIndex" src="https://i.ibb.co/yNsxTwX/image-1.png" class="one_image dispImage" />
+                <img @onclick="ToIndex" src="https://i.ibb.co/WpSVDkz/image-16.png" class="two_image " />
+            </li>
+            <li>
+                <a @onclick="ToAllCourse">Все курсы</a>
+            </li>
+            <li>
+                <a @onclick="ToMyCourse">Мои курсы</a>
+            </li>
+            <li>
+                <a @onclick="ToHomeWork">Домашние задания</a>
+            </li>
+            <li>
+                <a @onclick="ToAbout">О нас</a>
+            </li>
+            <li>
+                <a @onclick="ToContact">Контакты</a>
+            </li>
+            @if (emailbtn == "")
+            {
+                <li style="margin-left: 150px">
+                    <a @onclick="Login">Войти</a>
+                </li>
+                <li >
+                    <button @onclick="Register">Регистрация</button>
+                </li>
+            }
+            else
+            {
+                <li style="margin-left: 150px" class="fw-bold"><i class="bi bi-person-circle"></i> @emailbtn</li>
+                <li @onclick="Deleteemail" class="btn btn-outline-primary">Выйти</li>
+            }
+            
+        </ul>
+    </div>
+</div>
+
+<script>
+    window.addEventListener('scroll', function () {
+        var element = document.getElementsByClassName('Navbar')[0];
+        var firstImage = this.document.getElementsByClassName('one_image')[0]
+        var firstImages = this.document.getElementsByClassName('two_image')[0]
+
+        if (window.scrollY > 0) {
+            element.classList.add('scrolled');
+            firstImage.classList.remove('dispImage')
+            firstImages.classList.add('dispImage')
+        } else {
+            element.classList.remove('scrolled');
+            firstImage.classList.add('dispImage')
+            firstImages.classList.remove('dispImage')
+
+
+        }
+    });
+ 
+</script>
+@code{
+
+    
+    private string emailbtn;
+
+    void ToAllCourse()
+    {
+        NavigationManager.NavigateTo(NavigateUrl.ToCourse);
+    }
+
+    void Login()
+    {
+        NavigationManager.NavigateTo(NavigateUrl.ToLogin);
+    }
+    void Register()
+    {
+        NavigationManager.NavigateTo(NavigateUrl.ToRegister);
+    }
+
+   async void ToHomeWork()
+    {
+       var id = await LocalStoradge.GetEmail();
+       if (string.IsNullOrEmpty(id))
+       {
+           NavigationManager.NavigateTo(NavigateUrl.ToLogin);
+       }
+       else
+       {
+           NavigationManager.NavigateTo(NavigateUrl.ToHomeWork);
+       }
+    }
+
+   async void ToMyCourse()
+   {
+       var id = await LocalStoradge.GetEmail();
+        if (string.IsNullOrEmpty(id))
+        {
+            NavigationManager.NavigateTo(NavigateUrl.ToLogin);
+        }
+        else
+        {
+        NavigationManager.NavigateTo(NavigateUrl.ToMyCourse);
+        }
+    }
+
+     async void ToContact()
+    {
+        var id = await LocalStoradge.GetEmail();
+        if (string.IsNullOrEmpty(id))
+        {
+            NavigationManager.NavigateTo(NavigateUrl.ToLogin);
+        }
+        else
+        {
+        NavigationManager.NavigateTo(NavigateUrl.ToConatact);
+
+        }
+
+    }
+
+    void ToAbout()
+    {
+        NavigationManager.NavigateTo(NavigateUrl.ToTeacher);
+    }
+
+    void ToIndex()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var email = await JsRuntime.InvokeAsync<string>("localStorage.getItem", "email");
+        emailbtn = email;
+    }
+
+    async void Deleteemail()
+    {
+        var email = await JsRuntime.InvokeAsync<string>("localStorage.setItem", "email", "");
+        emailbtn = email;
+        await JsRuntime.InvokeVoidAsync("location.reload");
+    }
+
+
+
+
+
+
+
+
+}
+

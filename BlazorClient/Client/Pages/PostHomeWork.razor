@@ -1,0 +1,64 @@
+﻿    @page "/homeworkSend"
+    @using System.Runtime.CompilerServices
+    @using BlazorClient.Client.Servies
+@using BlazorClient.Shared
+    @inject ApiServices ApiServies
+    @inject IJSRuntime JsRuntime
+    @inject NavigationManager NavigationManager
+    @inject HttpClient Http
+    @inject LocalStoradge LocalStoradge
+
+    <head>
+    <style>
+
+    </style>
+    </head>
+    <Navbar/>
+    <div style="height: 400px;">
+    <div style="background-image: url(https://onlinedegrees.sandiego.edu/wp-content/uploads/2022/01/education_inequity_and_homework.jpg); background-repeat: no-repeat; background-size:cover ; height: 600px; background-position: center; width: 100%; position: absolute; top: 0; left: 0; right: 0; overflow: hidden; filter: brightness(50%);">
+    </div>
+    <h1 style="position: relative; color: white; text-align: center; margin-top: 300px;">Home Work</h1>
+    </div>
+    <div style="margin: 80px auto ;" class="container">
+    <div class="m-auto">
+    <div>
+    <h1 class="text-center">@task.Title</h1>
+            <p class="text-center">@task.Description</p>
+    </div>
+    <div>
+    <textarea  placeholder="Введите ваш ответ..." style="width: 400px; height:300px; position: relative; left: 50%; transform: translateX(-50%);">
+
+    </textarea>
+        <button class="btn btn-primary" style="margin: 150px 0 0 40px;">Отправить</button>
+        <div style="width: 100%; height: 100px;background: white; "></div>
+    </div>
+    </div>
+    </div>
+    <Footer/>
+    @code {
+    private string courseId;
+    private string lessonId;
+    private string TaskId;
+    private BlazorClient.Shared.Task task = new  BlazorClient.Shared.Task();
+        List<Lessons> lessons = new List<Lessons>();
+
+    protected override async System.Threading.Tasks.Task OnInitializedAsync()
+    {
+    var id = await LocalStoradge.GetCourseId();
+    if (id is not null)
+    {
+    courseId = id;
+    }
+    var LessonID = await JsRuntime.InvokeAsync<string>("localStorage.getItem", "lessonId");
+    lessonId = LessonID;
+
+
+        var taskID = await JsRuntime.InvokeAsync<string>("localStorage.getItem", "taskId");
+        var respons = await ApiServies.GetByIdTask(taskID);
+        task = respons;
+
+
+
+    }
+
+    }

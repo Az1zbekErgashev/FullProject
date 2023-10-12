@@ -1,0 +1,77 @@
+﻿@using BlazorClient.Client.Servies
+@inject IJSRuntime JsRuntime
+@inject LocalStoradge LocalStoradge
+@inject NavigationManager NavigationManager
+<head>
+    <style>
+        .FooterUl {
+            list-style: none;
+            color: grey;
+            margin: 0 60px;
+        }
+
+            .FooterUl li {
+                margin: 15px 0;
+                cursor: pointer;
+            }
+
+                .FooterUl li:first-child {
+                    margin-bottom: 30px;
+                    color: white;
+                    cursor: grab;
+                }
+    </style>
+</head>
+
+<div class="footer d-flex justify-content-center" style="position: relative; margin-top: 350px;" >
+    <div style="background: black; position: absolute; bottom: 0; left: -40px; right: -30px; display: flex;  justify-content: center; padding: 40px 0;">
+        <div >
+            <img  @onclick="ToIndex" src="https://i.ibb.co/WpSVDkz/image-16.png" alt="">
+            <div  class="d-flex" style="gap: 12px; margin-top: 40px; color: grey; font-size: 24px; cursor: pointer;">
+                <i class="bi bi-telegram"></i>
+                <i class="bi bi-instagram"></i>
+                <i class="bi bi-facebook"></i>
+            </div>
+        </div>
+        <div>
+            <ul class="FooterUl">
+                <li >ИНФОРМАЦИЯ</li>
+                <li @onclick="ToAllCourse">Все курсы</li>
+                <li @onclick="ToMyCourse">Мои курсы</li>
+                <li  >Домашние задания</li>
+                <li>Результаты учеников</li>
+                <li @onclick="ToAbout">О компании</li>
+            </ul>
+        </div>
+        <div>
+            <ul class="FooterUl">
+                <li>КОНТАКТЫ</li>
+                <li>+998 88 142 20 30</li>
+                <li>ergasevaziz0611@gmail.com</li>
+                <li>location</li>
+            </ul>
+        </div>
+    </div>
+           
+</div>
+
+@code
+{
+    void ToAllCourse()
+    {
+        NavigationManager.NavigateTo(NavigateUrl.ToCourse);
+    }
+    void ToMyCourse()
+    {
+        NavigationManager.NavigateTo(NavigateUrl.ToMyCourse);
+    }
+    void ToAbout()
+    {
+        NavigationManager.NavigateTo(NavigateUrl.ToTeacher);
+    }
+
+    void ToIndex()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}

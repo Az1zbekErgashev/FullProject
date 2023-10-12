@@ -1,0 +1,183 @@
+﻿body {
+}
+body {
+    box-sizing: border-box;
+    margin: 0;
+    background-color: whitesmoke;
+    overflow: hidden;
+}
+
+.Section_Logo {
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+    .Section_Logo img {
+        object-fit: contain;
+        width: 250px;
+    }
+
+.Login {
+    width: 35vw;
+    height: 80vh;
+    border: 1px solid #DFDFDF;
+    position: relative;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.Login_Header {
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 1s;
+}
+
+    .Login_Header .Login-Btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 60px;
+    }
+
+        .Login_Header .Login-Btn p {
+            margin: 0;
+            padding: 0;
+            font-size: 19px;
+            cursor: pointer;
+        }
+
+.Login_Body div:first-child {
+    margin-top: 5vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .Login_Body div:first-child h1 {
+        font-size: 26px;
+        letter-spacing: 1px;
+        font-weight: 700;
+    }
+
+.Login_Body div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 100px 0 100px;
+    height: 25vh;
+}
+
+    .Login_Body div:nth-child(2) input {
+        height: 6vh;
+        border-radius: 10px;
+        outline: none;
+        margin: 5px 0;
+        border: 1px solid rgba(0, 0, 0, 0.329);
+        padding: 0 30px;
+    }
+
+.Login_Body_Text_Page {
+    padding: 0px 100px;
+}
+
+.Login_Body div:nth-child(4) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+    .Login_Body div:nth-child(4) button {
+        width: 15vw;
+        height: 5vh;
+    }
+
+.Login_Body_End {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .Login_Body_End hr {
+        height: 1px;
+        width: 200px;
+        background-color: black;
+        border: none;
+    }
+
+    .Login_Body_End p {
+        padding: 0;
+        margin: 0;
+        margin: 0 20px;
+    }
+
+.Login_Footer_Register {
+    display: flex;
+    align-items: center;
+    padding: 10px 50px 0 50px;
+}
+
+    .Login_Footer_Register div {
+        margin: 0 10px;
+        display: flex;
+        align-items: center;
+        width: 50%;
+        height: 7vh;
+        background-color: white;
+        box-shadow: 0 0 3px rgba(128, 128, 128, 0.348);
+        border-radius: 10px;
+        padding: 0 10px;
+    }
+
+        .Login_Footer_Register div p {
+            margin: 0px;
+            padding: 0;
+            margin: 0 10px;
+            font-size: 14px;
+        }
+
+.Login_Footer_End {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    left: 0;
+    padding: 5px 0;
+}
+
+    .Login_Footer_End div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .Login_Footer_End div a {
+            text-decoration: none;
+        }
+
+        .Login_Footer_End div p {
+            margin: 0;
+            padding: 0;
+        }
+
+.active {
+    border: 1px solid #DFDFDF;
+}
+
+.fw_bold_p {
+    font-weight: 700;
+}
+

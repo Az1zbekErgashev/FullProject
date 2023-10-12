@@ -1,0 +1,231 @@
+﻿
+@page "/test"
+@using BlazorClient.Client.Servies
+@inject ApiServices ApiServies
+@inject IJSRuntime JsRuntime
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+@inject LocalStoradge LocalStoradge
+<head>
+    <style>
+        .squaretest {
+            width: 30px;
+            height: 30px;
+            border: 1px solid black;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+
+            width: 250px;
+        }
+
+            li p {
+                margin: 0 0 0 20px;
+            }
+        
+
+        .testdiv {
+            margin: 20px 0;
+        }
+
+        .yellow{
+            background: yellow;
+        }
+
+        .timer{
+            display: flex;
+            align-items: center;
+            font-family: cursive;
+            font-weight: 900;
+            font-size: 40px;
+            position: fixed;
+            right: 200px;
+        }
+
+        .result{
+            position: fixed;
+            right: 100px;
+            bottom: 200px;
+            font-size: 30px;
+            font-weight: 900;
+        }
+
+        #result {
+            font-size: 30px;
+            font-weight: 900;
+        }
+
+        .green{
+            background: green;
+        }
+    </style>
+</head>
+<div>
+    <div class="timer "><div>00:</div> <div id="countdown">3</div></div>
+    <h1 class="title">Тесты для закрепление</h1>
+    <div class="container ">
+      @if (test.Count > 0)
+      {
+          @foreach (var iteam in test)
+          {
+              <div class="question red" style="margin: 60px 0;">
+                  <div class="testdiv">
+                      <h3>@iteam.Id . @iteam.Queshioquestion</h3></div>
+                  <ul>
+                      <li>
+                          <div data-correct="@iteam.correct" class="squaretest my-4">A</div>
+                          <p  class="">@iteam.correct</p>
+                      </li>
+                      <li>
+                          <div  class="squaretest my-4">B</div>
+                          <p>@iteam.incorrect[0]</p></li>
+                      <li>
+                          <div class="squaretest my-4">C</div>
+                          <p>@iteam.incorrect[1]</p></li>
+                      <li>
+                          <div class="squaretest my-4">D</div>
+                          <p>@iteam.incorrect[2]</p></li>
+                  </ul>
+              </div>
+          }
+      }
+      else
+      {
+          <h1>Нет тестов</h1>
+      }
+    </div>
+    <div class="result d-none ">
+       <button  class=" d-none restart btn btn-primary">Начать заново</button> <div id="result"></div>
+    </div>
+    <div class="container d-flex justify-content-center "><button id="startButton" class="btn btn-primary">Начать тест</button></div>
+</div>
+@code {
+    private string courseId;
+    List<BlazorClient.Shared.Tests> test = new List<BlazorClient.Shared.Tests>();
+    protected override async System.Threading.Tasks.Task OnInitializedAsync()
+    {
+
+        var id = await LocalStoradge.GetCourseId();
+        courseId = id;
+
+        var respons = await ApiServies.GetTests(courseId);
+        test = respons;
+
+
+    }
+}
+<script>
+    let clickEnabled = true;
+    let runEnabled = true;
+    let countDiv = 0;
+    function run() {
+        if (runEnabled === true) {
+                const containers = document.querySelectorAll('.question');
+                containers.forEach(function (container) {
+                const squaretest = container.querySelectorAll('.squaretest');
+
+                squaretest.forEach(function (choice) {
+                        choice.addEventListener('click', function (evt) {
+                            if (clickEnabled) {
+                                squaretest.forEach(function (c) {
+                                    c.classList.remove('yellow');
+                                });
+                                evt.target.classList.add('yellow');
+                    
+                            }
+                        });
+                    });
+                });
+        }
+    }
+
+    function clockfun(){
+        runEnabled = false;
+    }
+
+    var timerElement = document.getElementById('countdown');
+    var startButton = document.getElementById('startButton');
+    var intervalId;
+    var resultDiv = document.getElementsByClassName("result")[0]
+    var restart = document.getElementsByClassName("restart")[0]
+
+    startButton.addEventListener('click', function () {
+        clickEnabled = true;
+
+        startButton.classList.add("d-none");
+
+        restart.classList.remove("d-none")
+        run()
+        var count = parseInt(timerElement.textContent);
+        if (count > 0) {
+            intervalId = setInterval(function () {
+                count--;
+                timerElement.textContent = count;
+
+                if (count === 0) {
+                    clearInterval(intervalId);
+                    clickEnabled = false;
+                    var selectedAnswer = document.querySelector('.yellow[data-correct]');
+                    var correctAnswer = document.querySelector('[data-correct]');
+                    if (correctAnswer) {
+                        countDiv++;
+                        correctAnswer.classList.add('green');
+                    }
+
+
+                    
+                    resultDiv.classList.remove("d-none");
+                    updateResult(runEnabled);
+                }
+            }, 1000);
+        }
+    });
+    restart.addEventListener('click', function () {
+        startButton.classList.remove("d-none");
+        restart.classList.add("d-none");
+
+        const choices = document.querySelectorAll('.squaretest');
+        choices.forEach(function (choice) {
+            choice.classList.remove('yellow');
+            choice.classList.remove('green');
+        });
+
+        countDiv = 0;
+        resultDiv.classList.add("d-none");
+        timerElement.textContent = '3';
+        runEnabled = true;
+
+    });
+
+    function updateResult() {
+        const questions = document.querySelectorAll('.question');
+        const totalQuestions = questions.length;
+        let correctAnswers = 0;
+
+        questions.forEach(function (question) {
+            const selectedAnswer = question.querySelector('.yellow[data-correct]');
+
+            if (selectedAnswer) {
+                correctAnswers++;
+            }
+        });
+
+        const percentage = (correctAnswers / totalQuestions) * 100;
+        const result = document.getElementById("result");
+
+        if (percentage > 80) {
+            result.classList.add("text-success");
+        } else if (percentage > 30 && percentage < 81) {
+            result.classList.add("text-yellow");
+        } else {
+            result.classList.add("text-danger");
+        }
+
+        result.textContent = `Процент прохождения: ${percentage}%`;
+    }
+</script>

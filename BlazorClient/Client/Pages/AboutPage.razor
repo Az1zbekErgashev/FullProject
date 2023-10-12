@@ -1,0 +1,258 @@
+﻿@page "/AboutCourse"
+@using BlazorClient.Client.Servies
+@using BlazorClient.Shared
+@using BlazorClient.Client.Dto
+@using System.ComponentModel.DataAnnotations
+@inject IJSRuntime JsRuntime
+@inject ApiServices ApiServies
+@inject NavigationManager NavigationManager
+@inject LocalStoradge LocalStoradge
+
+<head>
+
+    <style>
+        .swiper {
+            width: 600px;
+            height: 300px;
+        }
+    </style>
+</head>
+<Navbar/>
+<div>
+    <div style="height: 500px;">
+        <div style="background-image: url(@cours.Url); background-repeat: no-repeat; background-size:cover ; height: 600px; background-position: center; width: 100%; position: absolute; top: 0; left: 0; right: 0; overflow: hidden; filter: brightness(50%);">
+        </div>
+        <h1 style="position: relative; color: white; text-align: center; margin-top: 300px;">@cours.Name</h1>
+        <div style="width: 100%;">
+            <p style="position: relative; color: white; text-align: center; width: 1000px; transform: translateX(-50%); left: 50%; ">@cours.Description</p>
+
+        </div>
+    </div>
+    
+    <div class="container">
+        <div>
+            <div>
+                <p class="textElement" style="opacity: 1; font-size: 23px">@education.Tranding</p>
+                <p style="font-size: 23px;">@education.Description</p>
+            </div>
+            <div>
+                @if (education.courseСompletion != null)
+                {
+                    <ul style="list-style: none; margin: 60px 0;">
+                        <li style="font-weight: 700; font-size: 23px;" class="my-2">@education.courseСompletion[0]</li>
+                        <li style="font-size: 23px;" class="my-2">- @education.courseСompletion[1]</li>
+                        <li style="font-size: 23px;" class="my-2">- @education.courseСompletion[2]</li>
+                        <li style="font-size: 23px;" class="my-2">- @education.courseСompletion[3]</li>
+                        <li style="font-size: 23px;" class="my-2">- @education.courseСompletion[4]</li>
+                    </ul>
+                }
+            </div>
+            <div style="font-size: 23px">@education.CourseEnd</div>
+        </div>
+        
+        <div style="margin: 80px 0 0 0;"><h1>Отзывы</h1></div>
+        
+        <div>
+            <div class="swiper_row d-flex justify-content-between align-items-center" style="overflow-x: scroll; margin: 30px 0 0 0;">
+                @foreach (var iteam in result)
+                {
+                    <div class="">
+                        <div style="   
+                                                width: 300px;
+                                                padding: 20px 0 0 0;
+                                                height: 200px;
+                                                background: wheat;
+                                                border-radius: 10px;
+                                                text-align:center;"
+                                                class="swiper-slide"
+                                                                    >
+
+                            <p class="fw-bold">@iteam.Description</p>
+
+                        </div>
+                        <h3 class="my-3 text-center">@iteam.Name</h3>
+                    </div>
+                }
+            </div>
+        </div>
+        
+        <div class="container">
+            <div style="margin: 80px 0 0 0;"><h1>Отзывы урока</h1></div>
+            <div>
+                <p style="font-size: 23px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit velit, mattis id congue eu, eleifend non arcu
+                    . Nullam tempor porta malesuada. Cras dignissim consectetur cursus. Vivamus id maximus purus,
+                    ut porttitor ipsum. Cras finibus velit ac est rutrum, vitae scelerisque diam elementum. Mauris
+                    in dictum erat. Sed ac fringilla lorem. In hac habitasse platea dictumst. Sed efficitur diam nec 
+                    augue venenatis pharetra. Ut varius eleifend augue sed eleifend.</p>
+                
+
+                <div class="swiper d-flex justify-content-between align-items-center" style="overflow-y: hidden; overflow-x:scroll; width: 1200px; margin: 0 auto; height: 600px;">
+                    @foreach (var iteam in result)
+                    {
+                        <div class="">
+                            <div style="    width: 300px;
+                                                height: 500px;
+                                                background: wheat;
+                                                border-radius: 10px;
+                                                text-align:center;" 
+                                 class="swiper-slide">
+                                <img style="object-fit: cover; width: 300px; height: 500px;" class="fw-bold" src="@iteam.Url"/>
+                            </div>
+                            <h3 class="my-3 text-center">@iteam.Name</h3>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div style="margin-top: 60px;" class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Сколько будет длится данный курс?
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse  collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Обучение в SkillBox длится от 1 до 8 месяцев. Есть 38 вариантов курсов, стоимость которых – 2200-9 300 руб./мес.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                            В каком формате будет проходить курс?
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body"><ul>
+                            <li>Видеоурок Может иметь несколько форм: ...</li>
+                            <li>Вебинары ...</li>
+                            <li>Лонгриды ...</li>
+                            <li>Аудиоматериалы, подкасты ...</li>
+                            <li>Чаты или форумы ...</li>
+                            <li>Творческие задания ...</li>
+                            <li>Кейсы ...</li>
+                        </ul></div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                            Если нет никаких навыков и знаний, смогу ли я научиться этому
+                            или мне нужно сначала иметь базу знаний?
+                        </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Да, конечно вы без никаких затруднений можете научиться трейдингу, и уже после 2недели у вас будет первые результаты. Если будут какие-то трудности тогда наши кураторы помогут вам!</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin: 60px 0 60px 0;"><h1>Цена : @cours.Price сум</h1></div>
+            <div style="margin: 80px 0 0 0;">
+                @if (IsConfirmed)
+                {
+                    <button @onclick="Confirm" class="btn btn-outline-primary">Зписаться на курс</button>
+                }
+                else
+                {
+                    <button class="btn btn-outline-success">Вы записались на курс</button>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<Footer/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script>
+
+</script>
+@code {
+    private Course cours = new Course();
+    private Education education = new Education();
+    private List<Result> result = new List<Result>();
+    List<Course> UserCourse = new List<Course>();
+    List<Feedback> feedbacks = new List<Feedback>();
+    private bool IsConfirmed = true;
+    private string courseId;
+
+
+    private string UserEmail = String.Empty;
+    protected override async System.Threading.Tasks.Task OnInitializedAsync()
+    {
+
+        var id = await LocalStoradge.GetCourseId();
+        courseId = id;
+
+        var email = await LocalStoradge.GetEmail();
+        UserEmail = email;
+        var courseResult = await ApiServies.GetByIdCourse(courseId);
+        if (courseResult is not null)
+        {
+            cours = courseResult;
+        }
+
+
+        var educationCourse = await ApiServies.GetByEducation(courseId);
+        if (educationCourse is not null)
+        {
+            education = educationCourse;
+        }
+
+
+
+
+        var CourseFeedback = await ApiServies.GetByFeedback(cours.Id.ToString());
+        if (CourseFeedback is not null)
+        {
+            feedbacks = CourseFeedback;
+        }
+
+        var results = await ApiServies.GetByResult(education.Id.ToString());
+        if (results is not null)
+        {
+            result = results;
+        }
+
+        if (UserEmail == "")
+        {
+
+        }
+        else
+        {
+            var respons = await ApiServies.GetByUserCourse(UserEmail);
+            UserCourse = respons;
+            var AnyCourse = UserCourse.Any(c => c.Id == Convert.ToInt32(courseId));
+            if (AnyCourse)
+            {
+                IsConfirmed = false;
+                StateHasChanged();
+            }
+        }
+
+
+
+    }
+
+    async void Confirm()
+    {
+        var email = await LocalStoradge.GetEmail();
+        if (string.IsNullOrEmpty(email))
+        {
+            NavigationManager.NavigateTo(NavigateUrl.ToLogin);
+        }
+        Dto.UserCourse course = new UserCourse();
+        course.Email = email;
+        course.CourseId = Convert.ToInt32(courseId);
+        try
+        {
+            await ApiServies.AddCourse(course);
+        }
+        catch (Exception e)
+        {
+
+        }
+        IsConfirmed = false;
+        StateHasChanged();
+    }
+
+
+}

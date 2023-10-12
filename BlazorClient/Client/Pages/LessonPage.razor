@@ -1,0 +1,147 @@
+﻿@page "/lesson"
+@using BlazorClient.Shared
+@using BlazorClient.Client.Servies
+@inject ApiServices ApiServies
+@inject NavigationManager NavigationManager
+@inject LocalStoradge LocalStoradge;
+@inject IJSRuntime JsRuntime;
+<head>
+    <style>
+        .task-row {
+            width: 90vw;
+            height: 90vh;
+            overflow: hidden;
+        }
+
+        .lesson-row {
+            position: relative;
+            left: 50%;
+            transform: translateX(-40%);
+            padding: 00px 0;
+        }
+
+        .card-task {
+            width: 70vw;
+            height: 90vh;
+            margin: 10px 0;
+        }
+
+        .lesson-card {
+            margin: 20px 0;
+            height: 50px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: whitesmoke;
+            padding: 0 10px;
+            border-left: 5px solid azure;
+            box-shadow: 0 0 2px grey;
+        }
+
+        .borderLeft {
+            border-left: 5px solid blue;
+        }
+    </style>
+</head>
+<Navbar/>
+<div style="height: 400px;">
+    <div style="background-image: url(https://www.911memorial.org/sites/default/files/node/lesson-plan/feat-card-img/2020-03/Lesson-Landing-Page-Detail.jpg); background-repeat: no-repeat; background-size:cover ; height: 600px; background-position: center; width: 100%; position: absolute; top: 0; left: 0; right: 0; overflow: hidden; filter: brightness(50%);">
+    </div>
+    <h1 style="position: relative; color: white; text-align: center; margin-top: 300px;">Lesson</h1>
+</div>
+<div class="task-row" style="margin: 80px 0 ;">
+    <div class="row lesson-row">
+        <div class="col-3 p-4" style="overflow-x: hidden; overflow-y: scroll;">
+            <h3 style="text-align: center; font-weight: 700;" class="mb-5">Содержание</h3>
+            <div>
+                @foreach (var item in lessons)
+                {
+                    <div @onclick="() => LessonsId(item.Id, item.Title)" class="lesson-card  @(item.Id == Convert.ToInt32(lessonId)? "borderLeft" : "")">@item.Id @item.Title</div>
+                }
+            </div>
+        </div>
+        <div class="col-9" style="overflow-x: hidden; overflow-y: scroll;">
+            <div>
+               @if (lessons.Count > 0)
+               {
+                   @foreach (var item in lessons)
+                   {
+                       if (Convert.ToInt32(lessonId) == item.Id)
+                       {
+                           <div class="card-task">
+                               <div class="row p-2">
+                                   <div class="col-12 mb-5 mt-2 text-white">
+                                       <h3 class="text-dark">@item.Id @item.Title</h3>
+                                   </div>
+                                   <div class="col-12 text-white">
+                                       <p class="text-dark">@item.Description</p>
+                                   </div>
+                                   <iframe width="560" height="315" src="@item.Video_url"
+                                           title="YouTube video player" frameborder="0"
+                                           allow="accelerometer; autoplay; clipboard-write;
+encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                               </div>
+                               <div @onclick="ToTest" style="  margin: 100px 0 0 0;"><button class="btn btn-success">Пройти тест</button></div>
+                           </div>
+                       }
+                   }
+               }
+               else
+               {
+                   <h1>Нет Уроков</h1>
+               }
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+<Footer/>
+
+@code {
+    List<Lessons> lessons = new List<Lessons>();
+    private string courseId;
+    private string lessonId;
+    private string userEmail = String.Empty;
+    protected override async System.Threading.Tasks.Task OnInitializedAsync()
+    {
+        var emai = await LocalStoradge.GetEmail();
+        userEmail =  emai;
+        if (string.IsNullOrEmpty(userEmail))
+        {
+            NavigationManager.NavigateTo("/");
+        }
+        var id = await LocalStoradge.GetCourseId();
+        if (id is not null)
+        {
+            courseId = id;
+        }
+
+        var LessonID = await JsRuntime.InvokeAsync<string>("localStorage.getItem", "lessonId");
+        lessonId = LessonID;
+
+        var response = await ApiServies.GetLessons(courseId);
+        if (response is not null)
+        {
+            lessons = response;
+            
+        }
+        foreach (var VARIABLE in lessons)
+        {
+                Console.WriteLine(VARIABLE.Id);
+        }
+    }
+
+    async System.Threading.Tasks.Task LessonsId(int selectedLessonId, string lessonTitle)
+    {
+        this.lessonId = selectedLessonId.ToString();
+        await JsRuntime.InvokeVoidAsync("localStorage.setItem", "lessonId", selectedLessonId);
+    }
+
+    void ToTest()
+    {
+        NavigationManager.NavigateTo("/test");
+    }
+}
+

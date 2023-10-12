@@ -1,0 +1,77 @@
+﻿@page "/contact"
+@using System.Text
+@using BlazorClient.Client.Servies
+@inject IJSRuntime JsRuntime
+@inject ApiServices ApiServies
+@inject NavigationManager NavigationManager
+@inject LocalStoradge LocalStoradge
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        .col-4{
+           width: 400px;
+           height: 300px;
+        }
+    </style>
+</head>
+<Navbar/>
+<div>
+    <div style="height: 400px;">
+        <div style="background-image: url(https://media.istockphoto.com/id/1311934969/photo/contact-us.jpg?s=612x612&amp;w=0&amp;k=20&amp;c=_vmYyAX0aFi-sHH8eYS-tLLNfs1ZWXnNB8M7_KWwhgg=); background-repeat: no-repeat; background-size:cover ; height: 600px; background-position: center; width: 100%; position: absolute; top: 0; left: 0; right: 0; overflow: hidden; filter: brightness(50%);">
+        </div>
+        <h1 style="position: relative; color: white; text-align: center; margin-top: 300px;">Контактная информация</h1>
+    </div>
+    
+    <div class="container">
+        <div class="text-center" style="margin-bottom: 60px;"><h4>
+            Оставьте заявку, мы свяжемся и дадим подробное информацие о наших курсах
+        </h4></div>
+        
+        <div class="row" style="margin-bottom: 500px;">
+            <div class="col-4">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7IlJCRtGwv-O60DSSwJpYmxJvhxbnYnJkOw&ampusqp=CAU" style="object-fit: cover;"/>
+            </div>
+            <div class="col-4">
+                <ul style="list-style:none;">
+                    <li class="fw-bold my-3"><i class="bi bi-telephone"></i>  +998 88 142 20 30</li>
+                    <li class="fw-bold my-3"><i class="bi bi-envelope"></i>ergasevaziz0611@gmail.com</li>
+                    <li class="fw-bold my-3"><i class="bi bi-geo-alt"></i> location</li>
+                </ul>
+            </div>
+            <div class="col-4">
+                <input placeholder="Ваше имя" @bind="contact.Email" class="form-control w-75 my-3 px-4" />
+                <input placeholder="Ваш номер телефона" @bind="contact.PhoneNumber" class="form-control w-75 my-3 px-4" />
+                <input placeholder="Когда вам позвонить" @bind="contact.Location" class="form-control w-75 my-3 px-4" />
+                <button @onclick="AddConatct" class="btn btn-primary my-4">Заказать бесплатный звонок</button>
+                <p>Отправляя заявку, вы соглашаетесь на обработку ваших данных</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<Footer/>
+
+@code
+{
+    private BlazorClient.Shared.Contact contact = new BlazorClient.Shared.Contact();
+    private string UserEmail = String.Empty;
+
+
+    async System.Threading.Tasks.Task AddConatct()
+    {
+        if (UserEmail == "")
+        {
+            NavigationManager.NavigateTo(NavigateUrl.ToLogin);
+        }
+        ApiServies.GetContact(contact);
+        await JsRuntime.InvokeAsync<object>("alert", "Your request received and submitted to our staff");
+        await JsRuntime.InvokeVoidAsync("location.reload");
+    }
+    protected override async System.Threading.Tasks.Task OnInitializedAsync()
+    {
+        
+    }
+
+
+}

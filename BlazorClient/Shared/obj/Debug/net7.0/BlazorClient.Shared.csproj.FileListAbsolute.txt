@@ -1,0 +1,14 @@
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Shared\bin\Debug\net7.0\BlazorClient.Shared.deps.json
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Shared\bin\Debug\net7.0\BlazorClient.Shared.dll
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Shared\bin\Debug\net7.0\BlazorClient.Shared.pdb
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Shared\obj\Debug\net7.0\BlazorClient.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Shared\obj\Debug\net7.0\BlazorClient.Shared.AssemblyInfoInputs.cache
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Shared\obj\Debug\net7.0\BlazorClient.Shared.AssemblyInfo.cs
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Shared\obj\Debug\net7.0\BlazorClient.Shared.csproj.CoreCompileInputs.cache
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Shared\obj\Debug\net7.0\BlazorClient.Shared.dll
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Shared\obj\Debug\net7.0\refint\BlazorClient.Shared.dll
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Shared\obj\Debug\net7.0\BlazorClient.Shared.pdb
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Shared\obj\Debug\net7.0\ref\BlazorClient.Shared.dll
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Shared\obj\Debug\net7.0\BlazorClient.Shared.csproj.AssemblyReference.cache
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Shared\bin\Debug\net7.0\BlazorClient.Shared.runtimeconfig.json
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Shared\obj\Debug\net7.0\BlazorClient.Shared.genruntimeconfig.cache
