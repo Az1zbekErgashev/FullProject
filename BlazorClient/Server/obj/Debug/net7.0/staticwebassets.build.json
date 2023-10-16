@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LxMd7RGMJAlM8ngdNBKxBOrG3ZnJ2Wr/yVVZ6IzANTo=",
+  "Hash": "/e9Bxl1zHMPLlPPwLzgdaGU9s8nui02GVN/s9IMmiwM=",
   "Source": "BlazorClient.Server",
   "BasePath": "_content/BlazorClient.Server",
   "Mode": "Default",
@@ -435,6 +435,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\ergas\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.11\\lib\\net6.0\\Microsoft.EntityFrameworkCore.dll"
+    },
+    {
+      "Identity": "C:\\Users\\ergas\\source\\repos\\BlazorClient\\BlazorClient\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Microsoft.EntityFrameworkCore.InMemory.dll",
+      "SourceId": "BlazorClient.Client",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\ergas\\source\\repos\\BlazorClient\\BlazorClient\\Client\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.EntityFrameworkCore.InMemory.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\ergas\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\7.0.11\\lib\\net6.0\\Microsoft.EntityFrameworkCore.InMemory.dll"
     },
     {
       "Identity": "C:\\Users\\ergas\\source\\repos\\BlazorClient\\BlazorClient\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Microsoft.EntityFrameworkCore.Relational.dll",
@@ -5231,6 +5248,23 @@
       "OriginalItemSpec": "C:\\Users\\ergas\\source\\repos\\BlazorClient\\BlazorClient\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\System.IO.FileSystem.Primitives.dll"
     },
     {
+      "Identity": "C:\\Users\\ergas\\source\\repos\\BlazorClient\\BlazorClient\\Client\\obj\\Debug\\net7.0\\build-gz\\i6dos6hP.gz",
+      "SourceId": "BlazorClient.Client",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\ergas\\source\\repos\\BlazorClient\\BlazorClient\\Client\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.EntityFrameworkCore.InMemory.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "C:\\Users\\ergas\\source\\repos\\BlazorClient\\BlazorClient\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Microsoft.EntityFrameworkCore.InMemory.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\ergas\\source\\repos\\BlazorClient\\BlazorClient\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Microsoft.EntityFrameworkCore.InMemory.dll"
+    },
+    {
       "Identity": "C:\\Users\\ergas\\source\\repos\\BlazorClient\\BlazorClient\\Client\\obj\\Debug\\net7.0\\build-gz\\ifFGudwV.gz",
       "SourceId": "BlazorClient.Client",
       "SourceType": "Project",
@@ -7422,6 +7456,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Identity": "C:\\Users\\ergas\\source\\repos\\BlazorClient\\BlazorClient\\Client\\wwwroot\\css\\Card.css",
+      "SourceId": "BlazorClient.Client",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\ergas\\source\\repos\\BlazorClient\\BlazorClient\\Client\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "css/Card.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Card.css"
     },
     {
       "Identity": "C:\\Users\\ergas\\source\\repos\\BlazorClient\\BlazorClient\\Client\\wwwroot\\css\\login.css",

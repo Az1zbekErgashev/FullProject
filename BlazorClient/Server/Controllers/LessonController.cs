@@ -1,6 +1,5 @@
 ﻿using BlazorClient.Server.Data;
 using BlazorClient.Server.Repository;
-using BlazorClient.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlazorClient.Server.Controllers;

@@ -5,5 +5,6 @@ namespace BlazorClient.Server.Repository;
 
 public interface IContactRepository
 {
-   Task CreateContactAsync(Contact contact);
+    Task<List<Contact>> GetContactAsync();
+    Task CreateContactAsync(Contact contact);
 }

@@ -1,7 +1,6 @@
 ﻿using BlazorClient.Server.Data;
 using BlazorClient.Shared;
 using Microsoft.EntityFrameworkCore;
-using Task = System.Threading.Tasks.Task;
 
 namespace BlazorClient.Server.Repository
 {

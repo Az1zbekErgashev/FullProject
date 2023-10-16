@@ -881,3 +881,7 @@ C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Client\obj\Debug\net7.0\bu
 C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Client\obj\Debug\net7.0\build-gz\meRPt9Lh.gz
 C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Client\obj\Debug\net7.0\build-gz\qRMrvFe1.gz
 C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Client\obj\Debug\net7.0\build-gz\Yk+kHj+Y.gz
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Client\bin\Debug\net7.0\wwwroot\_framework\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Client\bin\Debug\net7.0\wwwroot\_framework\Microsoft.EntityFrameworkCore.InMemory.dll.gz
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Client\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\ergas\source\repos\BlazorClient\BlazorClient\Client\obj\Debug\net7.0\build-gz\i6dos6hP.gz

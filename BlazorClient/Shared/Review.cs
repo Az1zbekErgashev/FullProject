@@ -1,5 +1,8 @@
-﻿namespace BlazorClient.Shared
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BlazorClient.Shared
 {
+
     public class Review
     {
         public int Id { get; set; }
@@ -7,5 +10,6 @@
         public string Course_info { get; set; }
         public string comment { get; set; }
         public Task Task { get; set; }
+
     }
 }

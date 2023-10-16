@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace BlazorClient.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class nit1 : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,11 +15,11 @@ namespace BlazorClient.Server.Migrations
                 name: "Contact",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false),
-                    Location = table.Column<string>(type: "text", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    Location = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,11 +30,11 @@ namespace BlazorClient.Server.Migrations
                 name: "Teacher",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Url = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Url = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,11 +45,11 @@ namespace BlazorClient.Server.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FullName = table.Column<string>(type: "text", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false),
-                    Password = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FullName = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -62,13 +60,13 @@ namespace BlazorClient.Server.Migrations
                 name: "Course",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Url = table.Column<string>(type: "text", nullable: false),
-                    Price = table.Column<decimal>(type: "numeric", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: false),
-                    UserId = table.Column<int>(type: "integer", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Url = table.Column<string>(type: "TEXT", nullable: false),
+                    Price = table.Column<decimal>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -84,35 +82,39 @@ namespace BlazorClient.Server.Migrations
                 name: "Education",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    courseId = table.Column<int>(type: "integer", nullable: true),
-                    Tranding = table.Column<string>(type: "text", nullable: true),
-                    courseСompletion = table.Column<List<string>>(type: "text[]", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
-                    CourseEnd = table.Column<string>(type: "text", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CourseId = table.Column<int>(type: "INTEGER", nullable: false),
+                    courseComp1 = table.Column<string>(type: "TEXT", nullable: false),
+                    courseComp2 = table.Column<string>(type: "TEXT", nullable: false),
+                    courseComp3 = table.Column<string>(type: "TEXT", nullable: false),
+                    courseComp4 = table.Column<string>(type: "TEXT", nullable: false),
+                    Tranding = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    CourseEnd = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Education", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Education_Course_courseId",
-                        column: x => x.courseId,
+                        name: "FK_Education_Course_CourseId",
+                        column: x => x.CourseId,
                         principalTable: "Course",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Feedback",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Phone_Number = table.Column<string>(type: "text", nullable: false),
-                    Date = table.Column<string>(type: "text", nullable: false),
-                    CourseId = table.Column<int>(type: "integer", nullable: false),
-                    UserId = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Phone_Number = table.Column<string>(type: "TEXT", nullable: false),
+                    Date = table.Column<string>(type: "TEXT", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CourseId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -135,13 +137,13 @@ namespace BlazorClient.Server.Migrations
                 name: "Lessons",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Title = table.Column<string>(type: "text", nullable: false),
-                    Video_url = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
-                    Vedeo_url2 = table.Column<string>(type: "text", nullable: false),
-                    CourseId = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    Video_url = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Vedeo_url2 = table.Column<string>(type: "TEXT", nullable: false),
+                    CourseId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -158,12 +160,14 @@ namespace BlazorClient.Server.Migrations
                 name: "Tests",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    incorrect = table.Column<List<string>>(type: "text[]", nullable: false),
-                    correct = table.Column<string>(type: "text", nullable: false),
-                    Queshioquestion = table.Column<string>(type: "text", nullable: false),
-                    CourseId = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    incorrect1 = table.Column<string>(type: "TEXT", nullable: false),
+                    incorrect2 = table.Column<string>(type: "TEXT", nullable: false),
+                    incorrect3 = table.Column<string>(type: "TEXT", nullable: false),
+                    correct = table.Column<string>(type: "TEXT", nullable: false),
+                    Queshioquestion = table.Column<string>(type: "TEXT", nullable: false),
+                    CourseId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -180,12 +184,13 @@ namespace BlazorClient.Server.Migrations
                 name: "Result",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Url = table.Column<string>(type: "text", nullable: false),
-                    EducationId = table.Column<int>(type: "integer", nullable: false),
-                    UserId = table.Column<int>(type: "integer", nullable: false)
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Url = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    EducationId = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -208,13 +213,13 @@ namespace BlazorClient.Server.Migrations
                 name: "Task",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Title = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
-                    LessonsId = table.Column<int>(type: "integer", nullable: false),
-                    complete = table.Column<bool>(type: "boolean", nullable: false),
-                    Data = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    LessonsId = table.Column<int>(type: "INTEGER", nullable: false),
+                    complete = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Data = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -231,12 +236,12 @@ namespace BlazorClient.Server.Migrations
                 name: "HomeWork",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Img = table.Column<string>(type: "text", nullable: false),
-                    Title = table.Column<string>(type: "text", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    TaskId = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Img = table.Column<string>(type: "TEXT", nullable: false),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    TaskId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -253,12 +258,12 @@ namespace BlazorClient.Server.Migrations
                 name: "Review",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Course_name = table.Column<string>(type: "text", nullable: false),
-                    Course_info = table.Column<string>(type: "text", nullable: false),
-                    comment = table.Column<string>(type: "text", nullable: false),
-                    TaskId = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Course_name = table.Column<string>(type: "TEXT", nullable: false),
+                    Course_info = table.Column<string>(type: "TEXT", nullable: false),
+                    comment = table.Column<string>(type: "TEXT", nullable: false),
+                    TaskId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -277,9 +282,9 @@ namespace BlazorClient.Server.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Education_courseId",
+                name: "IX_Education_CourseId",
                 table: "Education",
-                column: "courseId");
+                column: "CourseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedback_CourseId",

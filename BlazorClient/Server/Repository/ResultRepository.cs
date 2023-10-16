@@ -13,7 +13,7 @@ namespace BlazorClient.Shared
             _context = context;
         }
 
-        public async Task<List<Result>> GetAllResults(int id) => await _context.Result.Include(i => i.User).Include(i =>i.Education).Where(f => f.Education.Id == id ).ToListAsync();
+        public async Task<List<Result>> GetAllResults(int id) => await _context.Result.Include(i => i.User).Include(i => i.Education).Where(f => f.Education.Id == id).ToListAsync();
 
 
 

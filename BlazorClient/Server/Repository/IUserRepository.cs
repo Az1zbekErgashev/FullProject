@@ -1,6 +1,4 @@
-﻿using BlazorClient.Client.Dto;
-using BlazorClient.Client.Pages;
-using BlazorClient.Server.Dto;
+﻿using BlazorClient.Server.Dto;
 using BlazorClient.Shared;
 using LoginDto = BlazorClient.Server.Dto.LoginDto;
 using Task = System.Threading.Tasks.Task;
@@ -16,6 +14,6 @@ namespace BlazorClient.Server.Repository
         Task UpdateUsers(User user);
         Task AddUserCourse(UserCourseDto userCourse);
         Task<List<Course>> GetUserCourse(string email);
-        Task<User>Login (LoginDto loginDto);
+        Task<User> Login(LoginDto loginDto);
     }
 }

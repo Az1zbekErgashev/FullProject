@@ -7,24 +7,24 @@ namespace BlazorClient.Server.Controllers;
 [ApiController]
 public class FeedBackController : Controller
 {
-   private readonly ICourseRepository _courseRepository;
-   private readonly IUserRepository _userRepository;
-   public readonly IFeedbackRepository _feedbackRepository;
+    private readonly ICourseRepository _courseRepository;
+    private readonly IUserRepository _userRepository;
+    public readonly IFeedbackRepository _feedbackRepository;
 
-   public FeedBackController(AppDbContext context, IFeedbackRepository feedbackRepository, ICourseRepository courseRepository, IUserRepository userRepository)
-   {
-       _feedbackRepository = feedbackRepository;
-       _courseRepository = courseRepository;
-       _userRepository = userRepository;
-   }
+    public FeedBackController(AppDbContext context, IFeedbackRepository feedbackRepository, ICourseRepository courseRepository, IUserRepository userRepository)
+    {
+        _feedbackRepository = feedbackRepository;
+        _courseRepository = courseRepository;
+        _userRepository = userRepository;
+    }
 
 
     [HttpGet("one")]
-   public async Task<IActionResult> GetFeedback(int id)
-   {
-       var all = await _feedbackRepository.GetAllFeetback(id);
-       return Ok(all);
-   }
+    public async Task<IActionResult> GetFeedback(int id)
+    {
+        var all = await _feedbackRepository.GetAllFeetback(id);
+        return Ok(all);
+    }
 
 
 }

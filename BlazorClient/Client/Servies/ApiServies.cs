@@ -1,7 +1,6 @@
-﻿using System.Net.Http.Json;
-using BlazorClient.Client.Dto;
+﻿using BlazorClient.Client.Dto;
 using BlazorClient.Shared;
-using Task = System.Threading.Tasks.Task;
+using System.Net.Http.Json;
 
 namespace BlazorClient.Client.Servies
 {
@@ -16,7 +15,7 @@ namespace BlazorClient.Client.Servies
 
         public async Task<List<Course>> GetCourseList()
         {
-            var result = await _httpClient.GetFromJsonAsync<List<Course>>("api/Course/alll");
+            var result = await _httpClient.GetFromJsonAsync<List<Course>>("api/Course/all");
             return result;
         }
 
@@ -24,26 +23,26 @@ namespace BlazorClient.Client.Servies
         {
             var result = await _httpClient.GetFromJsonAsync<Course>("/api/Course/one?id=" + id);
             return result;
-        }  
-        
+        }
+
         public async Task<Education?> GetByEducation(string id)
         {
             var result = await _httpClient.GetFromJsonAsync<Education>("/api/education/one?id=" + id);
             return result;
-        }  
-        
+        }
+
         public async Task<List<Feedback>?> GetByFeedback(string id)
         {
             var result = await _httpClient.GetFromJsonAsync<List<Feedback>>("/api/feedback/one?id=" + id);
             return result;
-        }  
-        
+        }
+
         public async Task<List<Result>> GetByResult(string id)
         {
             var result = await _httpClient.GetFromJsonAsync<List<Result>>("/api/result/one?id=" + id);
             return result;
         }
-        
+
         public async Task<List<Course>> GetByUserCourse(string email)
         {
             var result = await _httpClient.GetFromJsonAsync<List<Course>>("/api/user/user/course?email=" + email);
@@ -62,15 +61,15 @@ namespace BlazorClient.Client.Servies
 
         }
 
-        public async System.Threading.Tasks.Task <HttpResponseMessage> Login(LoginDto loginDto)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> Login(LoginDto loginDto)
         {
-            var res =  await _httpClient.PostAsJsonAsync("/api/user/login", loginDto);
+            var res = await _httpClient.PostAsJsonAsync("/api/user/login", loginDto);
             return res;
         }
 
-        public async System.Threading.Tasks.Task <HttpResponseMessage> GetContact(Contact contactq)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> GetContact(Contact contactq)
         {
-            var res =  await _httpClient.PostAsJsonAsync("/api/contact/one", contactq);
+            var res = await _httpClient.PostAsJsonAsync("/api/contact/one", contactq);
             return res;
         }
         public async Task<List<Teacher>> GetTeachers()

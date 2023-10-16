@@ -1,5 +1,4 @@
-﻿using BlazorClient.Server.Dto;
-using BlazorClient.Shared;
+﻿using BlazorClient.Shared;
 
 namespace BlazorClient.Server.Repository;
 

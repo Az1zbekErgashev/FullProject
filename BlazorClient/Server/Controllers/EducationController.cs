@@ -5,7 +5,7 @@ namespace BlazorClient.Server.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 public class EducationController : Controller
-{   
+{
     private readonly IEducationRepository _educationRepository;
 
     public EducationController(IEducationRepository educationRepository, ICourseRepository courseRepository)

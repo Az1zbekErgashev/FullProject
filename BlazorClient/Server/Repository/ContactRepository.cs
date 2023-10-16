@@ -9,6 +9,8 @@ namespace BlazorClient.Server.Repository
         private readonly AppDbContext _context;
         public ContactRepository(AppDbContext context) => _context = context;
 
+        public async Task<List<Contact>> GetContactAsync() => await _context.Contact.ToListAsync();
+
         public async System.Threading.Tasks.Task CreateContactAsync(Contact contact)
         {
             await _context.Contact.AddAsync(contact);

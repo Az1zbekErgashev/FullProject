@@ -1,6 +1,5 @@
 ﻿using BlazorClient.Server.Repository;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace BlazorClient.Server.Controllers
 {
@@ -15,7 +14,7 @@ namespace BlazorClient.Server.Controllers
             _courseRepository = courseRepository;
         }
 
-        [HttpGet("alll")]
+        [HttpGet("all")]
         public async Task<IActionResult> GetCourse()
         {
             var all = await _courseRepository.GetCourseAllAsync();

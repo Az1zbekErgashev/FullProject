@@ -1,8 +1,4 @@
-﻿
-
-
-using BlazorClient.Client.Dto;
-using BlazorClient.Server.Data;
+﻿using BlazorClient.Server.Data;
 using BlazorClient.Server.Dto;
 using BlazorClient.Shared;
 using Microsoft.EntityFrameworkCore;
@@ -43,11 +39,11 @@ namespace BlazorClient.Server.Repository
 
         }
 
-         public async Task<User> GetById(string email)
+        public async Task<User> GetById(string email)
         {
             var users = await _context.User
                 .FirstOrDefaultAsync(e => e.Email == email);
-                return users;
+            return users;
 
         }
 

@@ -36,16 +36,13 @@
                 <p style="font-size: 23px;">@education.Description</p>
             </div>
             <div>
-                @if (education.courseСompletion != null)
-                {
+ 
                     <ul style="list-style: none; margin: 60px 0;">
-                        <li style="font-weight: 700; font-size: 23px;" class="my-2">@education.courseСompletion[0]</li>
-                        <li style="font-size: 23px;" class="my-2">- @education.courseСompletion[1]</li>
-                        <li style="font-size: 23px;" class="my-2">- @education.courseСompletion[2]</li>
-                        <li style="font-size: 23px;" class="my-2">- @education.courseСompletion[3]</li>
-                        <li style="font-size: 23px;" class="my-2">- @education.courseСompletion[4]</li>
+                        <li style="font-weight: 700; font-size: 23px;" class="my-2">@education.courseComp1</li>
+                        <li style="font-size: 23px;" class="my-2">- @education.courseComp2</li>
+                        <li style="font-size: 23px;" class="my-2">- @education.courseComp3</li>
+                        <li style="font-size: 23px;" class="my-2">- @education.courseComp4</li>
                     </ul>
-                }
             </div>
             <div style="font-size: 23px">@education.CourseEnd</div>
         </div>

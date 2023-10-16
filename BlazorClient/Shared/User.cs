@@ -1,4 +1,6 @@
-﻿namespace BlazorClient.Shared
+﻿
+using System.ComponentModel.DataAnnotations.Schema;
+namespace BlazorClient.Shared
 {
     public class User
     {
@@ -6,7 +8,8 @@
         public string FullName { get; set; }
         public string Email { get; set; }
         public string? Password { get; set; }
-        public List<Course?>? Course { get; set; }
+        public List<Course> Course { get; set; }
+
 
     }
 }

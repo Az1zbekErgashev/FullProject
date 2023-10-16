@@ -209,68 +209,68 @@
 </head>
 
 <body>
+<form>
+        <div class="container-fluid overflow-">
+            <div class="col-12 Section_Logo">
+                <img src="https://i.ibb.co/yNsxTwX/image-1.png" alt="logo">
+            </div>
+            <div class="container ">
+                <div class="col-12">
+                    <div class="Login">
 
-    <div class="container-fluid overflow-">
-        <div class="col-12 Section_Logo">
-            <img src="https://i.ibb.co/yNsxTwX/image-1.png" alt="logo">
-        </div>
-        <div class="container ">
-            <div class="col-12">
-                <div class="Login">
-
-                    <!-- Login header  -->
-                    <div class="Login_Header">
-                        <div @onclick="singUp" class="Login-Btn register_btn  ">
-                            <p>Зарегистрироваться</p>
-                        </div>
-                        <div onclick="LoginBtn()" class="Login-Btn login_btn active">
-                            <p>Войти</p>
-                        </div>
-                    </div>
-                    <!-- Login Body  -->
-                    <div class="Login_Body">
-                        <div><h1>Войти в аккаунт</h1></div>
-                        <div>
-                            <input @bind="loginDto.Email" type="email" name="" id="" placeholder="Email">
-                            <input @bind="loginDto.Password" type="password" name="" id="" placeholder="Пароль">
-                        </div>
-                        <div class="Login_Body_Text_Page">
-                            <p>By clicking Sign In, you agree to our Terms of Use and our Privacy Policy.</p>
-                        </div>
-                        <div>
-                            <div class="d-block" style="line-height: 63px"><button @onclick="OnValidSubmit" class="btn btn-primary">Войти</button> <br/>
-                                <a class="text-center mt-4 " style="height: 30px; margin: 40px; " @onclick="ToPassWord">Забыли пароль?</a></div>
-                        </div>
-                        <div class="Login_Body_End">
-                            <hr>
-                            <p>или</p>
-                            <hr>
-                        </div>
-                    </div>
-                    <!-- Login Footer -->
-                    <div class="Login_Footer">
-                        <div class="Login_Footer_Register">
-                            <div><i class="fa-brands fa-google" style="color: #0008ff;"></i><p>Войти с Google</p></div>
-                            <div>
-                                <i class="fa-brands fa-facebook" style="color: #0008ff;"></i>
-                                <p>Войти с Facebook</p>
+                        <!-- Login header  -->
+                        <div class="Login_Header">
+                            <div @onclick="singUp" class="Login-Btn register_btn  ">
+                                <p>Зарегистрироваться</p>
+                            </div>
+                            <div onclick="LoginBtn()" class="Login-Btn login_btn active">
+                                <p>Войти</p>
                             </div>
                         </div>
-                        <div class="Login_Footer_End">
+                        <!-- Login Body  -->
+                        <div class="Login_Body">
+                            <div><h1>Войти в аккаунт</h1></div>
                             <div>
-                                <p>Нет аккаунта?</p>
-                                <a @onclick="singUp">Зарегистрироваться</a>
+                                <input required="Вы пропустили это поле" @bind="loginDto.Email" type="email" name="" id="inputValue" placeholder="Email">
+                                <input required="Вы пропустили это поле" @bind="loginDto.Password" type="password" name="" id="inputValue" placeholder="Пароль">
+                            </div>
+                            <div class="Login_Body_Text_Page">
+                                <p>By clicking Sign In, you agree to our Terms of Use and our Privacy Policy.</p>
+                            </div>
+                            <div>
+                                <div class="d-block" style="line-height: 63px">
+                                    <button @onclick="OnValidSubmit" class="btn btn-primary">Войти</button> <br />
+                                    <a class="text-center mt-4 " style="height: 30px; margin: 40px; " @onclick="ToPassWord">Забыли пароль?</a>
+                                </div>
                             </div>
                         </div>
+                        <!-- Login Footer -->
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
+
+    </form>
 </body>
 <script src="https://kit.fontawesome.com/4a51ac7252.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script>
+    const nameField = document.getElementById('inputValue');
+    var btnprimary = document.getElementsByClassName(" btn-primary")[0]
+    btnprimary.addEventListener("click", function (evt) {
+        evt.preventDefault();
+    })
+    nameField.addEventListener('input', () => {
+        nameField.setCustomValidity('');
+        nameField.checkValidity();
+        console.log(nameField.checkValidity());
+
+    });
+
+    nameField.addEventListener('invalid', () => {
+        nameField.setCustomValidity('Please fill in your First Name.');
+    })
     var Register = document.getElementsByClassName("register_btn")[0]
     var Login = document.getElementsByClassName("login_btn")[0]
     function RegisterBtn() {

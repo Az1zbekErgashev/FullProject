@@ -16,14 +16,14 @@ namespace BlazorClient.Server.Repository
             await _context.Education.Include(i => i.course).ToListAsync();
         }
 
-        public async Task <HomeWork> GetHomeWorkById(int id)
+        public async Task<HomeWork> GetHomeWorkById(int id)
         {
-            return (await _context.HomeWork.Include(i => i.Task).FirstOrDefaultAsync(i => i.Id == id)) !;
+            return (await _context.HomeWork.Include(i => i.Task).FirstOrDefaultAsync(i => i.Id == id))!;
         }
 
         public async Task<HomeWork> GetHomeWorkByRTaskId(int id)
         {
-            return (await _context.HomeWork.Include(i => i.Task).FirstOrDefaultAsync(i => i.Task.Id == id)) !;
+            return (await _context.HomeWork.Include(i => i.Task).FirstOrDefaultAsync(i => i.Task.Id == id))!;
 
         }
     }

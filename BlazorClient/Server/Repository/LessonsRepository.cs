@@ -11,6 +11,6 @@ public class LessonRepository : ILessonsRepository
 
 
 
-    public async Task <List<Lessons>> GetLessonsById(int id) =>
+    public async Task<List<Lessons>> GetLessonsById(int id) =>
         await _context.Lessons.Where(i => i.Course.Id == id).ToListAsync();
 }

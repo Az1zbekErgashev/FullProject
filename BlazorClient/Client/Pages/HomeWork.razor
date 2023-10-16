@@ -104,13 +104,6 @@
                                                }
                                            </div>
                                            <div>
-                                               @if (dateToCheck < item.Data)
-                                               {
-                                                   <h3> В процессе...</h3>
-
-                                               }
-                                               else
-                                               {
                                                    @if (item.complete == false)
                                                    {
                                                        <button disabled="disabled" class="bg-white text-danger">Не выполнено</button>
@@ -120,8 +113,6 @@
                                                        <button disabled="disabled" class="bg-white text-success">Выполнено</button>
 
                                                    }
-                                               }
-                                            
                                            </div>
                                        </div>
                                    </div>

@@ -1,5 +1,8 @@
-﻿namespace BlazorClient.Shared
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BlazorClient.Shared
 {
+
     public class Teacher
     {
         public int Id { get; set; }

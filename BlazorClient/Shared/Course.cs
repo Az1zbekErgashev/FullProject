@@ -1,5 +1,6 @@
-﻿namespace BlazorClient.Shared;
+﻿using System.ComponentModel.DataAnnotations;
 
+namespace BlazorClient.Shared;
 public class Course
 {
     public int Id { get; set; }

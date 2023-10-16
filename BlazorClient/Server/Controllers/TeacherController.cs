@@ -1,6 +1,4 @@
-﻿using BlazorClient.Server.Dto;
-using BlazorClient.Server.Repository;
-using BlazorClient.Shared;
+﻿using BlazorClient.Server.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlazorClient.Server.Controllers;
@@ -9,12 +7,12 @@ namespace BlazorClient.Server.Controllers;
 public class TeacherController : Controller
 {
     private readonly ITeacherRepository _teacherRepository;
-    public TeacherController (ITeacherRepository teacherRepository) => _teacherRepository = teacherRepository;
+    public TeacherController(ITeacherRepository teacherRepository) => _teacherRepository = teacherRepository;
 
     [HttpGet("one")]
     public async Task<IActionResult> GetReacher()
     {
         var list = await _teacherRepository.GetAllTeachers();
-        return Ok( list);
+        return Ok(list);
     }
 }

@@ -12,6 +12,6 @@ namespace BlazorClient.Server.Repository
             _context = context;
         }
 
-        public async Task<List<Feedback>> GetAllFeetback(int id) =>  await _context.Feedback.Include(e => e.Course).Include(i => i.User).Where(i => i.Course.Id == id).ToListAsync();
+        public async Task<List<Feedback>> GetAllFeetback(int id) => await _context.Feedback.Include(e => e.Course).Include(i => i.User).Where(i => i.Course.Id == id).ToListAsync();
     }
 }

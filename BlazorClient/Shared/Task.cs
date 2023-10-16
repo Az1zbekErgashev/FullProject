@@ -1,5 +1,8 @@
-﻿namespace BlazorClient.Shared
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BlazorClient.Shared
 {
+
     public class Task
     {
         public int Id { get; set; }
@@ -8,12 +11,6 @@
         public Lessons Lessons { get; set; }
         public bool complete { get; set; }
 
-        private DateTime _data;
-
-        public DateTime Data
-        {
-            get { return _data; }
-            set { _data = value.ToUniversalTime(); }
-        }
+        public string Data { get; set; }
     }
 }

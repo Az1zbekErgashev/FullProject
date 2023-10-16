@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "CtMPjCHhmBXr7prgjT4caM/IEa8HVh52R2K5Q0l2T0NGoDvfP84CRwf4Wpn87HmmsajoXsiF30XPaYMYjmeHeA==",
+  "dgSpecHash": "/Ifv8I379TDgnZvEr9cx7rlbCmjpcWQiZg/Lx2JPusV6D0OjAAFgN653maXqr/12vzAgSTciRqanlCnpeceiEA==",
   "success": true,
   "projectFilePath": "C:\\Users\\ergas\\source\\repos\\BlazorClient\\BlazorClient\\Shared\\BlazorClient.Shared.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\ergas\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.11\\microsoft.entityframeworkcore.abstractions.7.0.11.nupkg.sha512",
     "C:\\Users\\ergas\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.11\\microsoft.entityframeworkcore.analyzers.7.0.11.nupkg.sha512",
     "C:\\Users\\ergas\\.nuget\\packages\\microsoft.entityframeworkcore.design\\7.0.11\\microsoft.entityframeworkcore.design.7.0.11.nupkg.sha512",
+    "C:\\Users\\ergas\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\7.0.11\\microsoft.entityframeworkcore.inmemory.7.0.11.nupkg.sha512",
     "C:\\Users\\ergas\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.11\\microsoft.entityframeworkcore.relational.7.0.11.nupkg.sha512",
     "C:\\Users\\ergas\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\7.0.11\\microsoft.entityframeworkcore.tools.7.0.11.nupkg.sha512",
     "C:\\Users\\ergas\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
