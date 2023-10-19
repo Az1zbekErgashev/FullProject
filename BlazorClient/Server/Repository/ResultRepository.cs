@@ -1,4 +1,5 @@
-﻿using BlazorClient.Server.Data;
+﻿using BlazorClient.Server.AddData;
+using BlazorClient.Server.Data;
 using BlazorClient.Server.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,15 +9,19 @@ namespace BlazorClient.Shared
     {
 
         private readonly AppDbContext _context;
-        public ResultRepository(AppDbContext context)
+        private readonly AddData _add;
+        public ResultRepository(AppDbContext context, AddData add)
         {
             _context = context;
+            _add = add;
         }
 
-        public async Task<List<Result>> GetAllResults(int id) => await _context.Result.Include(i => i.User).Include(i => i.Education).Where(f => f.Education.Id == id).ToListAsync();
-
-
-
+        public async Task<List<Result>> GetAllResults(int id)
+        {
+            List<Result> results = await _add.GetResult();
+            var list = results.Where(i => i.Education.Id == id).ToList();
+            return list;
+        }
 
     }
 }

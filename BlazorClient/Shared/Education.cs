@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace BlazorClient.Shared
+﻿namespace BlazorClient.Shared
 {
 
     public class Education

@@ -22,6 +22,7 @@ public class ContactController : Controller
         await _contactRepository.CreateContactAsync(contact);
 
         var ContactPost = "ContactPost";
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
         if (!_imemoryCache.TryGetValue(ContactPost, out List<Contact> cachedContacts))
         {
             cachedContacts = await _contactRepository.GetContactAsync();
@@ -29,6 +30,7 @@ public class ContactController : Controller
             _imemoryCache.Set("ContactPost", cachedContacts, TimeSpan.FromMinutes(30));
 
         }
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
         return Ok(cachedContacts);
     }
 }

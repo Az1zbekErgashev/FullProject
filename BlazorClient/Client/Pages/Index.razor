@@ -1,150 +1,150 @@
-﻿@page "/"
-@using BlazorClient.Shared
-@using Task = BlazorClient.Shared.Task
-@using BlazorClient.Client.Servies
-@inject IJSRuntime JsRuntime
-@inject ApiServices ApiServies
-@inject NavigationManager NavigationManager
+﻿        @page "/"
+        @using BlazorClient.Shared
+        @using Task = BlazorClient.Shared.Task
+        @using BlazorClient.Client.Servies
+        @inject IJSRuntime JsRuntime
+        @inject ApiServices ApiServies
+        @inject NavigationManager NavigationManager
 
-<head>
+        <head>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-<style>
-.header_page {
-z-index: -1;
-height: 400px;
-position: absolute;
-right: 0;
-left: 0;
-top: 0;
-width: 100%;
-height: 100vh;
-overflow: hidden;
-}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <style>
+        .header_page {
+        z-index: -1;
+        height: 400px;
+        position: absolute;
+        right: 0;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        }
 
-.header_page img {
-object-fit: contain;
-width: 100vw;
-filter: brightness(40%);
-}
+        .header_page img {
+        object-fit: contain;
+        width: 100vw;
+        filter: brightness(40%);
+        }
 
-.header_page_text {
-color: white;
-position: absolute;
-top: 40%;
-left: 5%;
-transform: translate(-50% -50%);
-text-align: center;
-}
+        .header_page_text {
+        color: white;
+        position: absolute;
+        top: 40%;
+        left: 5%;
+        transform: translate(-50% -50%);
+        text-align: center;
+        }
 
-.header_page_text h2 {
-font-size: 40px;
-}
+        .header_page_text h2 {
+        font-size: 40px;
+        }
 
-.header_page_text p {
-font-size: 24px;
-margin-top: 60px;
-}
+        .header_page_text p {
+        font-size: 24px;
+        margin-top: 60px;
+        }
 
-.header_page_text button {
-margin-top: 100px;
-border: none;
-border-radius: 15px;
-width: 358px;
-height: 64px;
-background: #35A4D9;
-color: white;
-font-size: 21px;
-cursor: pointer;
-transition: 0.4s;
-box-shadow: 0 0 10px rgba(255, 255, 255, 0.338);
-}
+        .header_page_text button {
+        margin-top: 100px;
+        border: none;
+        border-radius: 15px;
+        width: 358px;
+        height: 64px;
+        background: #35A4D9;
+        color: white;
+        font-size: 21px;
+        cursor: pointer;
+        transition: 0.4s;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.338);
+        }
 
-.header_page_text button:hover {
-box-shadow: none;
-}
+        .header_page_text button:hover {
+        box-shadow: none;
+        }
 
-.body_index_page {
-width: 100%;
-padding: 50px;
-z-index: 1;
-}
+        .body_index_page {
+        width: 100%;
+        padding: 50px;
+        z-index: 1;
+        }
 
-.card {
-border-radius: 0px;
-box-shadow: 0 0 2px grey;
-margin: 20px 20px;
-transition: .4s;
-}
-.card:hover{
-    transform: scale(1.1);
-    box-shadow: 0 0 5px grey;
-}
+        .card {
+        border-radius: 0px;
+        box-shadow: 0 0 2px grey;
+        margin: 20px 20px;
+        transition: .4s;
+        }
+        .card:hover{
+            transform: scale(1.1);
+            box-shadow: 0 0 5px grey;
+        }
 
-.card img {
-border-radius: 0px;
-}
-</style>
-</head>
-<Navbar/>
-<div>
-<div class="header_page">
-<img src="https://static.vecteezy.com/system/resources/previews/006/262/476/non_2x/business-green-graph-chart-of-stock-market-investment-trading-profit-and-loss-financial-chart-with-up-trend-line-graph-stock-future-trading-free-photo.jpg"
-alt="">
-<div class="header_page_text">
-<h2>Хотите научиться профессионально инвестировать и всегда оставаться в плюсе?</h2>
-<p>Грамотно разберем вашу финансовую ситуацию, разработаем стратегию и поможем эффективно инвестировать
-</p>
-<button @onclick="ToCourse">Записаться на курс</button>
-</div>
-</div>
-
-
-<div style="margin-top: 100vh;" class="body_index_page">
-<h1 style="text-align: center; color: black; font-weight: 700; margin-bottom: 100px;">Все курсы</h1>
-<div style="margin: 0 auto;  display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
-
-@if (course.Count <= 0)
-{
-<h4>Нет курсов</h4>
-}
-else
-{
-@foreach (var iteam in course.Take(10))
-{
-<div class="card" style="width: 18rem;">
-<img src="@iteam.Url"
- class="card-img-top" alt="...">
-<div class="card-body">
-<h5 class="card-title">@iteam.Name</h5>
-<p class="card-text">@iteam.Description</p>
-</div>
-</div>
-}
-}
-</div>
-</div>
-</div>
-<Footer/>
+        .card img {
+        border-radius: 0px;
+        }
+        </style>
+        </head>
+        <Navbar/>
+        <div>
+        <div class="header_page">
+        <img src="https://static.vecteezy.com/system/resources/previews/006/262/476/non_2x/business-green-graph-chart-of-stock-market-investment-trading-profit-and-loss-financial-chart-with-up-trend-line-graph-stock-future-trading-free-photo.jpg"
+        alt="">
+        <div class="header_page_text">
+        <h2>Хотите научиться профессионально инвестировать и всегда оставаться в плюсе?</h2>
+        <p>Грамотно разберем вашу финансовую ситуацию, разработаем стратегию и поможем эффективно инвестировать
+        </p>
+        <button @onclick="ToCourse">Записаться на курс</button>
+        </div>
+        </div>
 
 
-@code
-{
-public List<Course>? course = new List<Course>();
+        <div style="margin-top: 100vh;" class="body_index_page">
+        <h1 style="text-align: center; color: black; font-weight: 700; margin-bottom: 100px;">Все курсы</h1>
+        <div style="margin: 0 auto;  display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
 
-protected override async System.Threading.Tasks.Task OnInitializedAsync()
-{
-var result = ApiServies.GetCourseList();
-if (result is not null)
-{
-  course = await result;
-}
+        @if (course.Count <= 0)
+        {
+        <h4>Нет курсов</h4>
+        }
+        else
+        {
+        @foreach (var iteam in course.Take(10))
+        {
+        <div class="card" style="width: 18rem;">
+            <img src="@iteam.Url"
+                 class="card-img-top" alt="..." />
+        <div class="card-body">
+        <h5 class="card-title">@iteam.Name</h5>
+        <p class="card-text">@iteam.Description</p>
+        </div>
+        </div>
+        }
+        }
+        </div>
+        </div>
+        </div>
+        <Footer/>
 
-}
 
-    void ToCourse()
-    {
-        NavigationManager.NavigateTo(NavigateUrl.ToCourse);
-    }
-}
+        @code
+        {
+        public List<Course>? course = new List<Course>();
+
+        protected override async System.Threading.Tasks.Task OnInitializedAsync()
+        {
+        var result = ApiServies.GetCourseList();
+        if (result is not null)
+        {
+          course = await result;
+        }
+
+        }
+
+            void ToCourse()
+            {
+                NavigationManager.NavigateTo(NavigateUrl.ToCourse);
+            }
+        }
 

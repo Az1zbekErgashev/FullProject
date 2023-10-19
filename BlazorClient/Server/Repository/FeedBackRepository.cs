@@ -7,11 +7,19 @@ namespace BlazorClient.Server.Repository
     public class FeedBackRepository : IFeedbackRepository
     {
         private AppDbContext _context;
-        public FeedBackRepository(AppDbContext context)
+        private readonly AddData.AddData _add;
+        public FeedBackRepository(AppDbContext context, AddData.AddData add)
         {
             _context = context;
+            _add = add;
         }
 
-        public async Task<List<Feedback>> GetAllFeetback(int id) => await _context.Feedback.Include(e => e.Course).Include(i => i.User).Where(i => i.Course.Id == id).ToListAsync();
+        public async Task<List<Feedback>> GetAllFeetback(int id)
+        {
+            List<Feedback> feedbacks = await _add.GetFeedback();
+            var list = feedbacks.Where(i => i.Course.Id == id).ToList();
+            return list;
+                    
+        }
     }
 }

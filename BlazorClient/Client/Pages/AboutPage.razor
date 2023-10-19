@@ -3,11 +3,11 @@
 @using BlazorClient.Shared
 @using BlazorClient.Client.Dto
 @using System.ComponentModel.DataAnnotations
+@using Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
 @inject IJSRuntime JsRuntime
 @inject ApiServices ApiServies
 @inject NavigationManager NavigationManager
 @inject LocalStoradge LocalStoradge
-
 <head>
 
     <style>
@@ -50,27 +50,7 @@
         <div style="margin: 80px 0 0 0;"><h1>Отзывы</h1></div>
         
         <div>
-            <div class="swiper_row d-flex justify-content-between align-items-center" style="overflow-x: scroll; margin: 30px 0 0 0;">
-                @foreach (var iteam in result)
-                {
-                    <div class="">
-                        <div style="   
-                                                width: 300px;
-                                                padding: 20px 0 0 0;
-                                                height: 200px;
-                                                background: wheat;
-                                                border-radius: 10px;
-                                                text-align:center;"
-                                                class="swiper-slide"
-                                                                    >
-
-                            <p class="fw-bold">@iteam.Description</p>
-
-                        </div>
-                        <h3 class="my-3 text-center">@iteam.Name</h3>
-                    </div>
-                }
-            </div>
+    
         </div>
         
         <div class="container">
@@ -81,24 +61,7 @@
                     ut porttitor ipsum. Cras finibus velit ac est rutrum, vitae scelerisque diam elementum. Mauris
                     in dictum erat. Sed ac fringilla lorem. In hac habitasse platea dictumst. Sed efficitur diam nec 
                     augue venenatis pharetra. Ut varius eleifend augue sed eleifend.</p>
-                
 
-                <div class="swiper d-flex justify-content-between align-items-center" style="overflow-y: hidden; overflow-x:scroll; width: 1200px; margin: 0 auto; height: 600px;">
-                    @foreach (var iteam in result)
-                    {
-                        <div class="">
-                            <div style="    width: 300px;
-                                                height: 500px;
-                                                background: wheat;
-                                                border-radius: 10px;
-                                                text-align:center;" 
-                                 class="swiper-slide">
-                                <img style="object-fit: cover; width: 300px; height: 500px;" class="fw-bold" src="@iteam.Url"/>
-                            </div>
-                            <h3 class="my-3 text-center">@iteam.Name</h3>
-                        </div>
-                    }
-                </div>
             </div>
             <div style="margin-top: 60px;" class="accordion accordion-flush" id="accordionFlushExample">
                 <div class="accordion-item">
@@ -170,6 +133,7 @@
     List<Feedback> feedbacks = new List<Feedback>();
     private bool IsConfirmed = true;
     private string courseId;
+    List<User> user = new List<User>();
 
 
     private string UserEmail = String.Empty;
@@ -178,7 +142,8 @@
 
         var id = await LocalStoradge.GetCourseId();
         courseId = id;
-
+        var usr = await ApiServies.Getusers();
+        user = usr;
         var email = await LocalStoradge.GetEmail();
         UserEmail = email;
         var courseResult = await ApiServies.GetByIdCourse(courseId);

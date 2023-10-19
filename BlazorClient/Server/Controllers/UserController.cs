@@ -19,12 +19,11 @@ public class UserController : Controller
         _userrepository = userrepository;
     }
 
-    [HttpGet]
+    [HttpGet("allusers")]
     public async Task<IActionResult> GetUsers()
-
     {
         var all = await _userrepository.GetAllUsers();
-        return Ok();
+        return Ok(all);
     }
 
     [HttpPost("one")]

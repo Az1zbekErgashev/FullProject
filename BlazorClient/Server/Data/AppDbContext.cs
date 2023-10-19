@@ -1,5 +1,6 @@
 ﻿using BlazorClient.Shared;
 using Microsoft.EntityFrameworkCore;
+using Task = BlazorClient.Shared.Task;
 
 namespace BlazorClient.Server.Data;
 
@@ -8,6 +9,22 @@ public class AppDbContext : DbContext
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
+    }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Course>();
+        modelBuilder.Entity<User>();
+        modelBuilder.Entity<Teacher>();
+        modelBuilder.Entity<HomeWork>();
+        modelBuilder.Entity<Task>();
+        modelBuilder.Entity<Lessons>();
+        modelBuilder.Entity<Feedback>();
+        modelBuilder.Entity<Result>();
+        modelBuilder.Entity<Review>();
+        modelBuilder.Entity<Tests>();
+        modelBuilder.Entity<Contact>();
+        base.OnModelCreating(modelBuilder);
+
     }
     public DbSet<User> User { get; set; }
     public DbSet<Tests> Tests { get; set; }

@@ -1,7 +1,7 @@
 ﻿using BlazorClient.Client.Dto;
 using BlazorClient.Shared;
 using System.Net.Http.Json;
-
+using Task = BlazorClient.Shared.Task;
 namespace BlazorClient.Client.Servies
 {
     public class ApiServices
@@ -13,10 +13,16 @@ namespace BlazorClient.Client.Servies
             _httpClient = httpClient;
         }
 
+        public async Task<List<User>> Getusers()
+        {
+            var result = await _httpClient.GetFromJsonAsync<List<User>>("api/User/allusers");
+            return result;
+        }
         public async Task<List<Course>> GetCourseList()
         {
-            var result = await _httpClient.GetFromJsonAsync<List<Course>>("api/Course/all");
+            var result = await _httpClient.GetFromJsonAsync<List<Course>>("/api/Course/coursall");
             return result;
+
         }
 
         public async Task<Course?> GetByIdCourse(string id)
@@ -75,30 +81,40 @@ namespace BlazorClient.Client.Servies
         public async Task<List<Teacher>> GetTeachers()
         {
             var result = await _httpClient.GetFromJsonAsync<List<Teacher>>("/api/teacher/one");
+#pragma warning disable CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
             return result;
+#pragma warning restore CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
         }
 
         public async Task<List<Lessons>> GetLessons(string id)
         {
             var result = await _httpClient.GetFromJsonAsync<List<Lessons>>("/api/lesson/one?id=" + id);
+#pragma warning disable CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
             return result;
+#pragma warning restore CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
         }
 
         public async Task<List<BlazorClient.Shared.Task>> GetTask()
         {
             var result = await _httpClient.GetFromJsonAsync<List<BlazorClient.Shared.Task>>("/api/task/one");
+#pragma warning disable CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
             return result;
+#pragma warning restore CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
         }
 
         public async Task<BlazorClient.Shared.Task> GetByIdTask(string id)
         {
             var result = await _httpClient.GetFromJsonAsync<BlazorClient.Shared.Task>("/api/task/two?id=" + id);
+#pragma warning disable CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
             return result;
+#pragma warning restore CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
         }
         public async Task<List<Tests>> GetTests(string id)
         {
             var result = await _httpClient.GetFromJsonAsync<List<Tests>>("/api/test/one?id=" + id);
+#pragma warning disable CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
             return result;
+#pragma warning restore CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
         }
 
 
