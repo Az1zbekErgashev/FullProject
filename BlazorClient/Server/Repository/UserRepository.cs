@@ -11,39 +11,28 @@ namespace BlazorClient.Server.Repository
 {
     public class UserRepository : IUserRepository
     {
+        private readonly List<User> _users;
         private readonly AppDbContext _context;
-        private readonly AddData.AddData _add;
-        public UserRepository(AppDbContext context, AddData.AddData add)
+        public UserRepository(AppDbContext context, List<User> users)
         {
             _context = context;
-            _add = add;
+            _users = users;
         }
 
         public async Task<User> CreateUsers(UserDto userDto)
         {
-            List<User> userDtos = await _add.GetLogin();
-
-            User user = userDtos.FirstOrDefault(u => u.Email == userDto.Email);
+            var user = _users.FirstOrDefault(u => u.Email == userDto.Email);
             if (user != null)
             {
-                // User already exists, return the found user
                 return user;
             }
-            User newUser = new User
+            var newUser = new User
             {
                 FullName = userDto.FullName,
                 Email = userDto.Email,
                 Password = userDto.Password
             };
-            //    List<User> userDtos = await _add.RegistesssrDto(user);
-            userDtos.Add(new()
-            {
-                FullName = "adasdasd",
-                Email = "dasdasdsa",
-                Password = "dasdasdsads",
-            });
-
-
+            _users.Add(newUser);
             return newUser;
         }
 
@@ -51,9 +40,9 @@ namespace BlazorClient.Server.Repository
 
         public async Task<User> Login(LoginDto loginDto)
         {
-            List<User> user = await _add.GetLogin();
+            var user = await _context.User.ToListAsync();
 
-            var users =  user.FirstOrDefault(i =>
+            var users = user.FirstOrDefault(i =>
                 i.Email == loginDto.Email && i.Password == loginDto.Password);
             return users;
         }
@@ -62,10 +51,9 @@ namespace BlazorClient.Server.Repository
 
         public async Task<List<User>> GetAllUsers()
         {
+            var users = await _context.User.ToListAsync();
 
-            List<User> users = await _add.GetLogin();
-
-            return users.ToList();
+            return users;
         }
 
         public async Task<User> GetById(string email)
@@ -81,22 +69,20 @@ namespace BlazorClient.Server.Repository
 
         public async Task<List<Course>> GetUserCourse(string email)
         {
-            List<User> users = await _add.GetLogin();
+            var users = await _context.User.ToListAsync();
 
-            var user =  users
+            var user = users
                 .FirstOrDefault(e => e.Email == email) ?? throw new BadHttpRequestException("User Not found");
-            List<Course> courses = await _add.GetCourseAsyncList();
-            int numId = 0;
-             foreach (var VARIABLE in user.Course)
-             {
-                 numId = VARIABLE.Id;
-             }
+            List<Course> courseDtos = user.Course.Select(course => new Course()
+            {
+                Id = course.Id,
+                Url = course.Url,
+                Name = course.Name,
+                Description = course.Description,
+                Price = course.Price
+            }).ToList();
 
-             var list = courses.FirstOrDefault(i => i.Id == numId);
-
-
-            
-            return new List<Course>() { list };
+            return courseDtos;
         }
 
 

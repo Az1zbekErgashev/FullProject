@@ -11,7 +11,7 @@ public class FeedBackController : Controller
     private readonly IUserRepository _userRepository;
     public readonly IFeedbackRepository _feedbackRepository;
 
-    public FeedBackController(AppDbContext context, IFeedbackRepository feedbackRepository, ICourseRepository courseRepository, IUserRepository userRepository, AddData.AddData addData)
+    public FeedBackController(AppDbContext context, IFeedbackRepository feedbackRepository, ICourseRepository courseRepository, IUserRepository userRepository)
     {
         _feedbackRepository = feedbackRepository;
         _courseRepository = courseRepository;

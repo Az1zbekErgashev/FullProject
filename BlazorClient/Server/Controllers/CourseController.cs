@@ -1,5 +1,4 @@
 ﻿using BlazorClient.Server.Repository;
-using BlazorClient.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlazorClient.Server.Controllers
@@ -9,19 +8,16 @@ namespace BlazorClient.Server.Controllers
     public class CourseController : Controller
     {
         private readonly ICourseRepository _courseRepository;
-      private readonly AddData.AddData _addData;
-        public CourseController(ICourseRepository courseRepository, AddData.AddData addData)
+        public CourseController(ICourseRepository courseRepository)
         {
             _courseRepository = courseRepository;
-            _addData = addData;
         }
 
         [HttpGet("coursall")]
         public async Task<IActionResult> GetCourse()
         {
-              List<Course> courses = await _addData.GetCourseAsyncList();
             var all = await _courseRepository.GetCourseAllAsync();
-            return Ok(courses);
+            return Ok(all);
         }
 
 

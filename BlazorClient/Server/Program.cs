@@ -2,17 +2,12 @@ using BlazorClient.Server.Data;
 using BlazorClient.Server.Repository;
 using BlazorClient.Shared;
 using Microsoft.EntityFrameworkCore;
-using System;
-using BlazorClient.Server.AddData;
-using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-builder.Services.AddTransient<AddData>();
-
 
 builder.Services.AddDbContext<AppDbContext>(o =>
 {
@@ -25,9 +20,12 @@ builder.Services.AddDbContext<AppDbContext>(o =>
 
 
 builder.Services.AddMemoryCache();
+
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddSingleton<List<User>>(UserSeed.Users.ToList());
+
 builder.Services.AddScoped<IHomeWorkRepository, HomeWorkRepository>();
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
@@ -36,28 +34,23 @@ builder.Services.AddScoped<IFeedbackRepository, FeedBackRepository>();
 builder.Services.AddScoped<IResultRepository, ResultRepository>();
 builder.Services.AddScoped<ILessonsRepository, LessonRepository>();
 builder.Services.AddScoped<ITestRepository, TestRepository>();
-
-builder.Services.Configure<IdentityOptions>(options =>
-{
-    // Password settings.
-    options.Password.RequireDigit = true;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireNonAlphanumeric = true;
-    options.Password.RequireUppercase = true;
-    options.Password.RequiredLength = 6;
-    options.Password.RequiredUniqueChars = 1;
-
-    // Lockout settings.
-    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-    options.Lockout.MaxFailedAccessAttempts = 5;
-    options.Lockout.AllowedForNewUsers = true;
-
-    // User settings.
-    options.User.AllowedUserNameCharacters =
-        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-    options.User.RequireUniqueEmail = false;
-});
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{ 
+    var services = scope.ServiceProvider;
+    try
+    {
+        var dbContext = services.GetRequiredService<AppDbContext>();
+        var userRepository = new UserRepository(dbContext, UserSeed.Users.ToList());
+        CourseSeed.SeedAsync(dbContext);
+    }   
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while seeding the database.");
+    }
+}
+
 
 if (app.Environment.IsDevelopment())
 {

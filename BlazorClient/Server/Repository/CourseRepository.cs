@@ -6,11 +6,9 @@ namespace BlazorClient.Server.Repository;
 public class CourseRepository : ICourseRepository
 {
     private readonly AppDbContext _context;
-    private readonly AddData.AddData _add;
-    public CourseRepository(AppDbContext context, AddData.AddData add)
+    public CourseRepository(AppDbContext context)
     {
         _context = context;
-        _add = add;
     }
 
 
@@ -20,8 +18,8 @@ public class CourseRepository : ICourseRepository
     }
     public async Task<Course> GetEducation(int id)
     {
-        List<Course> course = await _add.GetCourseAsyncList();
-        return  course.FirstOrDefault(u => u.Id == id) ?? throw new BadHttpRequestException("Course not found");
+        var list = await _context.Course.FirstOrDefaultAsync(i => i.Id == id) ?? throw new BadHttpRequestException("Course not found");
+        return list;
     }
 
 

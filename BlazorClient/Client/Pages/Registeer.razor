@@ -302,8 +302,10 @@
                 if (root.TryGetProperty("email", out JsonElement emailElement))
                 {
                     string email = emailElement.GetString()!;
+                    string id = emailElement.GetString()!;
 
-                    await SaveToLocalStorage("email", email);
+                    await SaveToLocalStorage("email",email);
+                    await SaveToLocalStorageId("id", id);
                 }
             }
 
@@ -314,6 +316,11 @@
     private async Task SaveToLocalStorage(string key, string value)
     {
         await JsRuntime.InvokeVoidAsync("localStorage.setItem", key, value);
+        await JsRuntime.InvokeVoidAsync("localStorage.setItem", key, value);
+
+    }    private async Task SaveToLocalStorageId(string key, string value)
+    {
+        await JsRuntime.InvokeVoidAsync("localStorage.setItem", key, userDto.Id);
 
     }
 

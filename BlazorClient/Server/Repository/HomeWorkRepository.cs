@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using BlazorClient.Server.Data;
+﻿using BlazorClient.Server.Data;
 using BlazorClient.Shared;
 using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
@@ -10,11 +8,9 @@ namespace BlazorClient.Server.Repository
     public class HomeWorkRepository : IHomeWorkRepository
     {
         private readonly AppDbContext _context;
-        private readonly AddData.AddData _add;
-        public HomeWorkRepository(AppDbContext context, AddData.AddData add)
+        public HomeWorkRepository(AppDbContext context)
         {
             _context = context;
-            _add = add;
         }
 
 
@@ -25,15 +21,14 @@ namespace BlazorClient.Server.Repository
 
         public async Task<HomeWork> GetHomeWorkById(int id)
         {
-            List<HomeWork> Home = await _add.GetHomeWork();
-            var list = Home.FirstOrDefault(i => i.Id == id)!;
-            return list;
+            return (await _context.HomeWork.Include(i => i.Task).FirstOrDefaultAsync(i => i.Id == id)!);
         }
+
 
         public async Task<HomeWork> GetHomeWorkByRTaskId(int id)
-            {
-                return (await _context.HomeWork.Include(i => i.Task).FirstOrDefaultAsync(i => i.Task.Id == id))!;
+        {
+            return (await _context.HomeWork.Include(i => i.Task).FirstOrDefaultAsync(i => i.Task.Id == id))!;
 
-            }
         }
     }
+}

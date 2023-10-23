@@ -7,19 +7,12 @@ namespace BlazorClient.Server.Repository
     public class TeacherRepository : ITeacherRepository
     {
         private readonly AppDbContext _context;
-        private readonly AddData.AddData _add;
-        public TeacherRepository(AppDbContext context, AddData.AddData add)
+        public TeacherRepository(AppDbContext context)
         {
             _context = context;
-            _add = add;
         }
 
-        public async Task<List<Teacher>> GetAllTeachers()
-        {
-            List<Teacher> teachers = await _add.GetTeacher();
-            var list  = teachers.ToList();
-            return list;
-        }
+        public async Task<List<Teacher>> GetAllTeachers() => await _context.Teacher.ToListAsync();
 
     }
 }
